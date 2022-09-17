@@ -1,0 +1,130 @@
+module.exports = {
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'airbnb',
+    'airbnb-typescript',
+  ],
+  plugins: ['react', '@typescript-eslint', 'react-hooks'],
+  env: {
+    browser: true,
+    jasmine: true,
+    jest: true,
+    node: true,
+  },
+  rules: {
+    '@typescript-eslint/comma-dangle': ['error', 'never'],
+    'react/function-component-definition': [2, { namedComponents: 'arrow-function' }],
+    'react/jsx-uses-react': 'off',
+    'react/react-in-jsx-scope': 'off',
+    camelcase: 'off',
+    'linebreak-style': 'off',
+    'no-console': ['warn', { allow: ['warn', 'error'] }],
+    'no-control-regex': 'off',
+    'no-use-before-define': 'off',
+    'no-param-reassign': 'off',
+    'no-undef': 'off',
+    '@typescript-eslint/camelcase': 'off',
+    '@typescript-eslint/no-empty-function': 'off',
+    '@typescript-eslint/no-use-before-define': 'off',
+    'react/no-array-index-key': 'off',
+    'import/order': [
+      'error',
+      {
+        alphabetize: {
+          order: 'asc',
+        },
+        groups: ['builtin', 'external', 'internal'],
+        'newlines-between': 'always',
+        pathGroups: [
+          {
+            pattern: './**',
+            group: 'internal',
+            position: 'after',
+          },
+          {
+            pattern: '../**',
+            group: 'internal',
+            position: 'after',
+          },
+          {
+            pattern: '@/**',
+            group: 'internal',
+            position: 'after',
+          },
+        ],
+        pathGroupsExcludedImportTypes: ['builtin'],
+      },
+    ],
+    'import/extensions': 'off',
+    'import/prefer-default-export': 'off',
+    'react/require-default-props': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'react/jsx-curly-spacing': ['error', { when: 'always', attributes: false, children: true }],
+    'no-unused-vars': 'off',
+    'react/jsx-filename-extension': 'off',
+    '@typescript-eslint/indent': 'off',
+    indent: ['error', 2, { SwitchCase: 1 }],
+    'react/jsx-indent-props': 'off',
+    'react/jsx-max-props-per-line': ['error', { maximum: 1 }],
+    '@typescript-eslint/explicit-function-return-type': 'error',
+    'max-len': [
+      'error',
+      {
+        code: 150,
+        ignoreStrings: true,
+        ignoreRegExpLiterals: true,
+        ignorePattern: '^import\\s.+\\sfrom\\s.+;$',
+      },
+    ],
+    'array-element-newline': ['error', 'consistent'],
+    'array-bracket-newline': ['error', { multiline: true }],
+    'comma-dangle': ['error', 'never'],
+    'multiline-ternary': ['error', 'always-multiline'],
+    'object-curly-newline': ['error', { multiline: true, consistent: true }],
+    'object-property-newline': ['error', { allowAllPropertiesOnSameLine: true }],
+    'import/no-unresolved': 'off',
+    'jsx-a11y/click-events-have-key-events': 'off',
+    'jsx-a11y/no-static-element-interactions': 'off',
+    'jsx-a11y/anchor-is-valid': 'off',
+    '@typescript-eslint/interface-name-prefix': 'off',
+    'newline-per-chained-call': ['error', { ignoreChainWithDepth: 2 }],
+    'react/jsx-fragments': 'off',
+    'react/jsx-sort-props': ['error'],
+    'jsx-a11y/alt-text': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/type-annotation-spacing': ['error', { before: false, after: true }],
+    '@typescript-eslint/member-delimiter-style': [
+      'error',
+      {
+        multiline: {
+          delimiter: 'semi',
+          requireLast: true,
+        },
+        singleline: {
+          delimiter: 'semi',
+          requireLast: false,
+        },
+      },
+    ],
+  },
+  settings: {
+    react: {
+      pragma: 'React',
+      version: 'detect',
+    },
+    'import/resolver': {
+      node: {
+        paths: ['kancelaria'],
+      },
+      typescript: {},
+    },
+  },
+
+  parser: '@typescript-eslint/parser',
+
+  parserOptions: {
+    project: ['./tsconfig.json'],
+  },
+}
