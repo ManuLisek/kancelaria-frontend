@@ -10,6 +10,10 @@
     "eslint": "npx eslint . --ext .js,.jsx,.ts,.tsx --fix"
   },
   "dependencies": {
+    "@emotion/core": "^11.0.0",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/icons-material": "^5.10.6",
     "@mui/material": "^5.10.5",
     "@mui/styled-engine-sc": "^5.10.3",
     "eslint-config-next": "^12.3.0",
