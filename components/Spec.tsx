@@ -1,4 +1,3 @@
-
 import Card from '@mui/material/Card';
 import styled from 'styled-components';
 
@@ -67,17 +66,13 @@ const Title = styled.h3`
 interface SpecProps {
   title: string;
   icon: JSX.Element;
-};
+}
 
-
-const Spec = ({title, icon}: SpecProps): JSX.Element => {
-
-  return (
-    <StyledSpec>
-      <IconContainer>{icon}</IconContainer>
-      <Title>{title}</Title>
-    </StyledSpec>
-  )
-};
+const Spec = ({ title, icon }: SpecProps): JSX.Element => (
+  <StyledSpec>
+    <IconContainer>{icon}</IconContainer>
+    <Title>{title}</Title>
+  </StyledSpec>
+);
 
 export default Spec;
