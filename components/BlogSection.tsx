@@ -3,8 +3,6 @@ import Grid from '@mui/material/Grid';
 import styled from 'styled-components';
 import BlogCard from './BlogCard';
 import Button from './Button';
-import books from '../assets/images/books.jpg';
-import sculpture from '../assets/images/sculpture.jpg';
 
 const StyledGrid = styled(Grid)`
 
@@ -21,7 +19,25 @@ const ButtonContainer = styled.div`
   height: 100px;
 `;
 
-const BlogSection = () => (
+interface Image {
+  src: string;
+  alt: string;
+}
+
+interface TransformedArticle {
+  key: number;
+  title: string;
+  id: number;
+  content: string;
+  description: string;
+  image: Image;
+}
+
+interface BlogSectionProps {
+  articles: TransformedArticle[];
+}
+
+const BlogSection = ({ articles }: BlogSectionProps) => (
   <Container>
     <StyledGrid
       container
@@ -29,15 +45,15 @@ const BlogSection = () => (
       columnSpacing={2}
       alignItems="center"
     >
-      <Grid item xs={12} sm={6} md={4}>
-        <BlogCard title="Prawo" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam posuere consequat nunc sit amet mollis. Maecenas mattis odio maximus tellus tempus, in pulvinar purus tempor. Suspendisse a arcu placerat, lacinia neque eu, sagittis ante. Donec pretium tortor sed lacus commodo, ornare convallis dui sodales. In posuere erat quis diam dapibus, eu interdum sem pulvinar." image={books.src} />
-      </Grid>
-      <Grid item xs={12} sm={6} md={4}>
-        <BlogCard title="I" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam posuere consequat nunc sit amet mollis. Maecenas mattis odio maximus tellus tempus, in pulvinar purus tempor. Suspendisse a arcu placerat, lacinia neque eu, sagittis ante. Donec pretium tortor sed lacus commodo, ornare convallis dui sodales. In posuere erat quis diam dapibus, eu interdum sem pulvinar." image={sculpture.src} />
-      </Grid>
-      <Grid item xs={12} sm={6} md={4}>
-        <BlogCard title="Sprawiedliwość" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam posuere consequat nunc sit amet mollis. Maecenas mattis odio maximus tellus tempus, in pulvinar purus tempor. Suspendisse a arcu placerat, lacinia neque eu, sagittis ante. Donec pretium tortor sed lacus commodo, ornare convallis dui sodales. In posuere erat quis diam dapibus, eu interdum sem pulvinar." image={books.src} />
-      </Grid>
+      {articles.map((article) => (
+        <Grid key={article.key} item xs={12} sm={6} md={4}>
+          <BlogCard
+            title={article.title}
+            description={article.description}
+            image={article.image.src}
+          />
+        </Grid>
+      ))}
     </StyledGrid>
     <ButtonContainer>
       <Button href="#" text="Więcej" />
