@@ -1,0 +1,42 @@
+export interface Image {
+  src: string;
+  alt: string;
+}
+
+export interface ImageData {
+  data: {
+    attributes: {
+      url: string;
+      alternativeText: string;
+    }
+  }
+}
+
+export interface ArticleAttributes {
+  content: string;
+  description: string;
+  title: string;
+  image: ImageData;
+}
+
+export interface Article {
+  id: number;
+  attributes: ArticleAttributes;
+}
+
+export interface ApiResponse {
+  data: Article[];
+}
+
+export interface TransformedArticle {
+  key: number;
+  title: string;
+  id: number;
+  content: string;
+  description: string;
+  image: Image;
+}
+
+export interface TransformedResponse {
+  articles: TransformedArticle[];
+}
