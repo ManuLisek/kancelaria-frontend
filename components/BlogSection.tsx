@@ -48,6 +48,7 @@ const BlogSection = ({ articles }: BlogSectionProps) => (
       {articles.map((article) => (
         <Grid key={article.key} item xs={12} sm={6} md={4}>
           <BlogCard
+            id={article.id}
             title={article.title}
             description={article.description}
             image={article.image.src}

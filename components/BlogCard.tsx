@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Link from 'next/link';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -18,9 +19,12 @@ interface BlogCardProps {
   title: string;
   description: string;
   image: string;
+  id: number;
 }
 
-const BlogCard = ({ title, description, image }:BlogCardProps): JSX.Element => (
+const BlogCard = ({
+  title, description, image, id,
+}:BlogCardProps): JSX.Element => (
   <Card sx={{ maxWidth: 345 }}>
     <CardMedia
       component="img"
@@ -36,9 +40,11 @@ const BlogCard = ({ title, description, image }:BlogCardProps): JSX.Element => (
         {description}
       </StyledTypography>
     </CardContent>
-    <CardActions>
-      <Button size="small">Learn More</Button>
-    </CardActions>
+    <Link href={`/article/${id}`}>
+      <CardActions>
+        <Button size="small">Learn More</Button>
+      </CardActions>
+    </Link>
   </Card>
 );
 
