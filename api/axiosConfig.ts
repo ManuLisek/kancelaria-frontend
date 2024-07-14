@@ -1,15 +1,9 @@
 import axios from 'axios';
-import {
-  TransformedArticle, ApiResponse,
-} from '../types/articleTypes';
+import { TransformedArticle, GetArticlesResponse, GetArticleResponse } from '../types/articleTypes';
 
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_STRAPI_URL,
 });
-
-interface TransformedResponse {
-  articles: TransformedArticle[];
-}
 
 export default {
   getArticlesData: () => instance({
@@ -19,23 +13,50 @@ export default {
       Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
     },
     transformResponse: [
-      (response): TransformedResponse => {
-        const parsedResponse: ApiResponse = JSON.parse(response);
+      (response): { articles: TransformedArticle[] } => {
+        const parsedResponse: GetArticlesResponse = JSON.parse(response);
         const transformedArticles: TransformedArticle[] = parsedResponse.data.map(
-          ({ id, attributes }) => ({
-            key: id,
-            title: attributes.title,
-            id,
-            content: attributes.content,
-            description: attributes.description,
+          (article) => ({
+            key: article.id,
+            title: article.attributes.title,
+            id: article.id,
+            content: article.attributes.content,
+            description: article.attributes.description,
             image: {
-              src: `${process.env.NEXT_PUBLIC_STRAPI_URL}${attributes.image.data.attributes.url}`,
-              alt: attributes.image.data.attributes.alternativeText,
+              src: `${process.env.NEXT_PUBLIC_STRAPI_URL}${article.attributes.image.data.attributes.url}`,
+              alt: article.attributes.image.data.attributes.alternativeText,
             },
           }),
         );
         return {
           articles: transformedArticles,
+        };
+      },
+    ],
+  }),
+
+  getArticleData: (id: string) => instance({
+    method: 'GET',
+    url: `/api/articles/${id}?populate=*`,
+    headers: {
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+    },
+    transformResponse: [
+      (response): { article: TransformedArticle } => {
+        const parsedResponse: GetArticleResponse = JSON.parse(response);
+        const transformedArticle: TransformedArticle = {
+          key: parsedResponse.data.id,
+          title: parsedResponse.data.attributes.title,
+          id: parsedResponse.data.id,
+          content: parsedResponse.data.attributes.content,
+          description: parsedResponse.data.attributes.description,
+          image: {
+            src: `${process.env.NEXT_PUBLIC_STRAPI_URL}${parsedResponse.data.attributes.image.data.attributes.url}`,
+            alt: parsedResponse.data.attributes.image.data.attributes.alternativeText,
+          },
+        };
+        return {
+          article: transformedArticle,
         };
       },
     ],

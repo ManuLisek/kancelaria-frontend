@@ -24,8 +24,12 @@ export interface Article {
   attributes: ArticleAttributes;
 }
 
-export interface ApiResponse {
+export interface GetArticlesResponse {
   data: Article[];
+}
+
+export interface GetArticleResponse {
+  data: Article;
 }
 
 export interface TransformedArticle {
