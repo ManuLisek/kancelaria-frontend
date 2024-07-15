@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import Button from '@mui/material/Button';
 import styled from 'styled-components';
 
@@ -10,14 +11,13 @@ const StyledButton = styled(Button)`
 `;
 
 interface ButtonProps {
-  href: string;
   text: string;
 }
 
-const ButtonComponent = ({ href, text }: ButtonProps): JSX.Element => (
-  <StyledButton href={href} variant="contained">
-    { text }
+const ButtonComponent = forwardRef<HTMLButtonElement, ButtonProps>(({ text, ...props }, ref) => (
+  <StyledButton ref={ref} variant="contained" {...props}>
+    {text}
   </StyledButton>
-);
+));
 
 export default ButtonComponent;

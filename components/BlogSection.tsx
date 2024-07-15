@@ -2,21 +2,12 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import styled from 'styled-components';
 import BlogCard from './BlogCard';
-import Button from './Button';
 
 const StyledGrid = styled(Grid)`
 
   @media (max-width: 599px) {
     flex-direction: column;
   }
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100px;
 `;
 
 interface Image {
@@ -56,9 +47,6 @@ const BlogSection = ({ articles }: BlogSectionProps) => (
         </Grid>
       ))}
     </StyledGrid>
-    <ButtonContainer>
-      <Button href="#" text="Więcej" />
-    </ButtonContainer>
   </Container>
 );
 
