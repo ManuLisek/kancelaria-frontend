@@ -2,6 +2,7 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import styled from 'styled-components';
 import BlogCard from './BlogCard';
+import { TransformedArticle } from '../types/articleTypes';
 
 const StyledGrid = styled(Grid)`
 
@@ -9,20 +10,6 @@ const StyledGrid = styled(Grid)`
     flex-direction: column;
   }
 `;
-
-interface Image {
-  src: string;
-  alt: string;
-}
-
-interface TransformedArticle {
-  key: number;
-  title: string;
-  id: number;
-  content: string;
-  description: string;
-  image: Image;
-}
 
 interface BlogSectionProps {
   articles: TransformedArticle[];

@@ -10,6 +10,7 @@ import Specs from '../components/Specs';
 import books from '../assets/images/books.jpg';
 import sculpture from '../assets/images/sculpture.jpg';
 import { TransformedArticle } from '../types/articleTypes';
+import { TransformedSpec } from '../types/specTypes';
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -21,13 +22,14 @@ const ButtonContainer = styled.div`
 
 interface Props {
   articles: TransformedArticle[];
+  specs: TransformedSpec[];
 }
 
-const Home: NextPage<Props> = ({ articles }: Props) => (
+const Home: NextPage<Props> = ({ articles, specs }: Props) => (
   <>
     <AboutMeSection />
     <Divider image={books.src} title="Specjalizacje" />
-    <Specs />
+    <Specs specs={specs} />
     <Divider image={sculpture.src} title="Potrzebujesz pomocy prawnej online? Skontaktuj się ze mną" />
     <BlogSection articles={articles} />
     <ButtonContainer>
@@ -41,12 +43,14 @@ const Home: NextPage<Props> = ({ articles }: Props) => (
 export default Home;
 
 export async function getStaticProps() {
-  const { data } = await axiosConfig.getArticlesData();
-  const latestArticles = data.articles.slice(0, 3);
+  const { data: articlesData } = await axiosConfig.getArticlesData();
+  const latestArticles = articlesData.articles.slice(0, 3);
+  const { data: specsData } = await axiosConfig.getSpecsData();
 
   return {
     props: {
       articles: latestArticles,
+      specs: specsData.results,
     },
   };
 }
