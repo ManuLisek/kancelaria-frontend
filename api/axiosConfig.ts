@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { TransformedArticle, GetArticlesResponse, GetArticleResponse } from '../types/articleTypes';
+import { TransformedSpec, GetSpecsResponse } from '../types/specTypes';
 
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_STRAPI_URL,
@@ -57,6 +58,30 @@ export default {
         };
         return {
           article: transformedArticle,
+        };
+      },
+    ],
+  }),
+
+  getSpecsData: () => instance({
+    method: 'GET',
+    url: '/api/specs',
+    headers: {
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+    },
+    transformResponse: [
+      (response): { results: TransformedSpec[] } => {
+        const parsedResponse: GetSpecsResponse = JSON.parse(response);
+        const transformedSpecs: TransformedSpec[] = parsedResponse.results.map(
+          ({ id, name, content }) => ({
+            key: id,
+            name,
+            id,
+            content,
+          }),
+        );
+        return {
+          results: transformedSpecs,
         };
       },
     ],

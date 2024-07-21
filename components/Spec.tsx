@@ -49,24 +49,17 @@ const StyledSpec = styled(Card)`
   }
 `;
 
-const IconContainer = styled.div`
-  color: ${(props) => props.theme.palette.primary.main};
-  transition-duration: .5s;
-`;
-
 const Title = styled.h3`
   transition-duration: .5s;
 `;
 
 interface SpecProps {
-  title: string;
-  icon: JSX.Element;
+  name: string;
 }
 
-const Spec = ({ title, icon }: SpecProps): JSX.Element => (
+const Spec = ({ name }: SpecProps): JSX.Element => (
   <StyledSpec>
-    <IconContainer>{icon}</IconContainer>
-    <Title>{title}</Title>
+    <Title>{name}</Title>
   </StyledSpec>
 );
 
