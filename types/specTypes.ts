@@ -1,18 +1,24 @@
-export interface TransformedSpec {
-  key: number;
-  name: string;
-  id: number;
+export interface SpecAttributes {
   content: string;
+  name: string;
+}
+
+export interface Spec {
+  id: number;
+  attributes: SpecAttributes;
 }
 
 export interface GetSpecsResponse {
-  results: TransformedSpec[];
+  data: Spec[];
 }
 
-export interface GetSpecResponse {
-  results: TransformedSpec;
+export interface TransformedSpec {
+  key: number;
+  id: number;
+  content: string;
+  name: string;
 }
 
 export interface TransformedResponse {
-  articles: TransformedSpec[];
+  specs: TransformedSpec[];
 }

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Card from '@mui/material/Card';
 import styled from 'styled-components';
 
@@ -54,13 +55,16 @@ const Title = styled.h3`
 `;
 
 interface SpecProps {
+  id: number;
   name: string;
 }
 
-const Spec = ({ name }: SpecProps): JSX.Element => (
-  <StyledSpec>
-    <Title>{name}</Title>
-  </StyledSpec>
+const Spec = ({ id, name }: SpecProps): JSX.Element => (
+  <Link href={`/spec/${id}`}>
+    <StyledSpec>
+      <Title>{name}</Title>
+    </StyledSpec>
+  </Link>
 );
 
 export default Spec;
