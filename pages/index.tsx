@@ -50,7 +50,7 @@ export async function getStaticProps() {
   return {
     props: {
       articles: latestArticles,
-      specs: specsData.results,
+      specs: specsData.specs,
     },
   };
 }

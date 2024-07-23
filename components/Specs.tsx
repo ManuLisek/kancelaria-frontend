@@ -10,7 +10,7 @@ interface SpecProps {
 const Specs = ({ specs }: SpecProps) => {
   const specsList = specs.map((spec: TransformedSpec) => (
     <Grid key={spec.id} item xs={6} sm={4}>
-      <Spec name={spec.name} />
+      <Spec id={spec.id} name={spec.name} />
     </Grid>
   ));
 

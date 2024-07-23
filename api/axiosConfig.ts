@@ -70,18 +70,40 @@ export default {
       Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
     },
     transformResponse: [
-      (response): { results: TransformedSpec[] } => {
+      (response): { specs: TransformedSpec[] } => {
         const parsedResponse: GetSpecsResponse = JSON.parse(response);
-        const transformedSpecs: TransformedSpec[] = parsedResponse.results.map(
-          ({ id, name, content }) => ({
-            key: id,
-            name,
-            id,
-            content,
+        const transformedSpecs: TransformedSpec[] = parsedResponse.data.map(
+          (spec) => ({
+            key: spec.id,
+            id: spec.id,
+            content: spec.attributes.content,
+            name: spec.attributes.name,
           }),
         );
         return {
-          results: transformedSpecs,
+          specs: transformedSpecs,
+        };
+      },
+    ],
+  }),
+
+  getSpecData: (id: string) => instance({
+    method: 'GET',
+    url: `/api/specs/${id}`,
+    headers: {
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+    },
+    transformResponse: [
+      (response): { spec: TransformedSpec } => {
+        const parsedResponse: TransformedSpec = JSON.parse(response);
+        const transformedSpec: TransformedSpec = {
+          key: parsedResponse.id,
+          id: parsedResponse.id,
+          content: parsedResponse.content,
+          name: parsedResponse.name,
+        };
+        return {
+          spec: transformedSpec,
         };
       },
     ],
