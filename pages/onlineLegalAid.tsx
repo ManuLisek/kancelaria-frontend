@@ -1,9 +1,9 @@
 import type { NextPage } from 'next';
 
-const onlineLegalAid: NextPage = () => (
+const onlineLegalAidPage: NextPage = () => (
   <>
     Pomoc prawna online
   </>
 );
 
-export default onlineLegalAid;
+export default onlineLegalAidPage;

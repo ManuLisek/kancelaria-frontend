@@ -1,40 +1,26 @@
-import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import axiosConfig from '../../api/axiosConfig';
-import { TransformedArticle } from '../../types/articleTypes';
+import { useRouter } from 'next/router';
+import { NextPage } from 'next';
+import { useData } from '../../context/DataContext';
 
-interface Props {
-  article: TransformedArticle;
-}
+const ArticlePage: NextPage = () => {
+  const router = useRouter();
+  const { id } = router.query;
+  const { articles } = useData();
 
-const ArticlePage: NextPage<Props> = ({ article }: Props) => (
-  <main>
-    <h1>{article.title}</h1>
-    <div>{article.content}</div>
-  </main>
-);
+  const currentArticle = articles.find((article) => article.id.toString() === id);
+
+  return (
+    <main>
+      {currentArticle
+      && (
+      <>
+        <h1>{currentArticle.title}</h1>
+        <div>{currentArticle.content}</div>
+      </>
+      )}
+
+    </main>
+  );
+};
 
 export default ArticlePage;
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  const { data } = await axiosConfig.getArticlesData();
-
-  const paths = data.articles?.map((article: TransformedArticle) => ({
-    params: { id: article.id.toString() },
-  }));
-
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { data } = await axiosConfig.getArticleData(`${params?.id}`);
-  const { article } = data;
-
-  return {
-    props: {
-      article,
-    },
-  };
-};

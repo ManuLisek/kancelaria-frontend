@@ -1,40 +1,24 @@
-import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import axiosConfig from '../../api/axiosConfig';
-import { TransformedSpec } from '../../types/specTypes';
+import { useRouter } from 'next/router';
+import { NextPage } from 'next';
+import { useData } from '../../context/DataContext';
 
-interface Props {
-  spec: TransformedSpec;
-}
+const SpecPage: NextPage = () => {
+  const router = useRouter();
+  const { id } = router.query;
+  const { specs } = useData();
+  const currentSpec = specs.find((spec) => spec.id.toString() === id);
 
-const SpecPage: NextPage<Props> = ({ spec }: Props) => (
-  <main>
-    <h1>{spec.name}</h1>
-    <div>{spec.content}</div>
-  </main>
-);
+  return (
+    <main>
+      {currentSpec
+        && (
+          <>
+            <h1>{currentSpec.name}</h1>
+            <div>{currentSpec.content}</div>
+          </>
+        )}
+    </main>
+  );
+};
 
 export default SpecPage;
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  const { data } = await axiosConfig.getSpecsData();
-
-  const paths = data.specs?.map((spec: TransformedSpec) => ({
-    params: { id: spec.id.toString() },
-  }));
-
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { data } = await axiosConfig.getSpecData(`${params?.id}`);
-  const { spec } = data;
-
-  return {
-    props: {
-      spec,
-    },
-  };
-};
