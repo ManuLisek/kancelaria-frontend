@@ -1,9 +1,9 @@
 import type { NextPage } from 'next';
 
-const Contact: NextPage = () => (
+const ContactPage: NextPage = () => (
   <>
     Contact
   </>
 );
 
-export default Contact;
+export default ContactPage;

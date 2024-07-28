@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import styled from 'styled-components';
@@ -6,8 +7,8 @@ import LocationIcon from '@mui/icons-material/LocationOn';
 import MailIcon from '@mui/icons-material/Mail';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import PhoneIcon from '@mui/icons-material/Phone';
-import specsData from '../data/specsData';
 import logo from '../assets/images/logo.png';
+import { useData } from '../context/DataContext';
 
 const Image = styled.img`
   margin-right: 10px;
@@ -78,61 +79,67 @@ const AllRightsContainer = styled.div`
   font-size: 14px;
 `;
 
-const specs = specsData.map((spec) => (
-  <ListItem key={spec.id}>
-    {spec.title}
-  </ListItem>
-));
-
 const copyRightSymbol = String.fromCodePoint(0xA9);
 const currentYear = new Date().getFullYear();
 const allRightsReserved = `${copyRightSymbol} XXXX-${currentYear} Wika. Wszelkie prawa zastrzeżone.`;
 
-const Footer = (): JSX.Element => (
-  <Container>
-    <Grid container spacing={4}>
-      <Grid item xs={12} sm={4}>
-        <FlexContainer>
-          <Image src={logo.src} alt="logo" />
-          <Title>Lorem Ipsum</Title>
-        </FlexContainer>
-        <Paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam posuere consequat nunc
-          sit amet mollis. Maecenas mattis odio maximus tellus tempus, in pulvinar purus tempor.
-        </Paragraph>
-        <MediaContainer>
-          <StyledFacebookIcon />
-          <StyledInstagramIcon />
-        </MediaContainer>
+const Footer = (): JSX.Element => {
+  const { specs } = useData();
+
+  const specsList = specs.map((spec) => (
+    <Link href={`/spec/${spec.id}`} key={spec.id}>
+      <ListItem>
+        {spec.name}
+      </ListItem>
+    </Link>
+  ));
+
+  return (
+    <Container>
+      <Grid container spacing={4}>
+        <Grid item xs={12} sm={4}>
+          <FlexContainer>
+            <Image src={logo.src} alt="logo" />
+            <Title>Lorem Ipsum</Title>
+          </FlexContainer>
+          <Paragraph>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam posuere consequat nunc
+            sit amet mollis. Maecenas mattis odio maximus tellus tempus, in pulvinar purus tempor.
+          </Paragraph>
+          <MediaContainer>
+            <StyledFacebookIcon />
+            <StyledInstagramIcon />
+          </MediaContainer>
+        </Grid>
+        <Grid item xs={12} sm={4}>
+          <Title>Specjalizacje</Title>
+          <FlexContainer>
+            <List>
+              {specsList}
+            </List>
+          </FlexContainer>
+        </Grid>
+        <Grid item xs={12} sm={4}>
+          <Title>Kontakt</Title>
+          <Paragraph>
+            <StyledLocationIcon />
+            Iławska 16/17, Iława
+          </Paragraph>
+          <Paragraph>
+            <StyledPhoneIcon />
+            666 666 666
+          </Paragraph>
+          <Paragraph>
+            <StyledMailIcon />
+            wiktoriasendzik@gmail.com
+          </Paragraph>
+        </Grid>
       </Grid>
-      <Grid item xs={12} sm={4}>
-        <Title>Specjalizacje</Title>
-        <FlexContainer>
-          <List>
-            {specs}
-          </List>
-        </FlexContainer>
-      </Grid>
-      <Grid item xs={12} sm={4}>
-        <Title>Kontakt</Title>
-        <Paragraph>
-          <StyledLocationIcon />
-          Iławska 16/17, Iława
-        </Paragraph>
-        <Paragraph>
-          <StyledPhoneIcon />
-          666 666 666
-        </Paragraph>
-        <Paragraph>
-          <StyledMailIcon />
-          wiktoriasendzik@gmail.com
-        </Paragraph>
-      </Grid>
-    </Grid>
-    <AllRightsContainer>
-      {allRightsReserved}
-    </AllRightsContainer>
-  </Container>
-);
+      <AllRightsContainer>
+        {allRightsReserved}
+      </AllRightsContainer>
+    </Container>
+  );
+};
 
 export default Footer;
