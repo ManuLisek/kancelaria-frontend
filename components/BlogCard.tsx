@@ -1,50 +1,68 @@
 import Link from 'next/link';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
 
-const StyledTypography = styled(Typography)`
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;  
-  overflow: hidden;
+const StyledArticlesTitle = styled.h4`
+  color: black;
+`;
+
+const StyledCard = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 450px;
+  padding: 20px;
+  background-color: white;
+  opacity: .9;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  @media (max-width: 899px) {
+    width: 100%;
+  }
+`;
+
+const StyledImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
+const StyledImgWrapper = styled.div`
+  width: 130px;
+  height: 86px;
+  flex-shrink: 0;
+
+  @media (max-width: 599px) {
+    width: 100px;
+    height: 66px;
+  }
 `;
 
 interface BlogCardProps {
   title: string;
-  description: string;
   image: string;
   id: number;
 }
 
 const BlogCard = ({
-  title, description, image, id,
-}:BlogCardProps): JSX.Element => (
-  <Card sx={{ maxWidth: 345 }}>
-    <CardMedia
-      component="img"
-      height="140"
-      image={image}
-      alt={title}
-    />
-    <CardContent>
-      <Typography gutterBottom variant="h5" component="div">
+  title, image, id,
+}: BlogCardProps): JSX.Element => (
+  <Link href={`/article/${id}`}>
+    <StyledCard>
+      <StyledImgWrapper>
+        <StyledImg
+          src={image}
+          alt={title}
+        />
+      </StyledImgWrapper>
+      <StyledArticlesTitle>
         {title}
-      </Typography>
-      <StyledTypography variant="body2" color="text.secondary">
-        {description}
-      </StyledTypography>
-    </CardContent>
-    <Link href={`/article/${id}`}>
-      <CardActions>
-        <Button size="small">Learn More</Button>
-      </CardActions>
-    </Link>
-  </Card>
+      </StyledArticlesTitle>
+    </StyledCard>
+  </Link>
 );
 
 export default BlogCard;

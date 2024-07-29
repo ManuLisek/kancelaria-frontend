@@ -1,38 +1,104 @@
+import Link from 'next/link';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
 import styled from 'styled-components';
 import BlogCard from './BlogCard';
-// import { TransformedArticle } from '../types/articleTypes';
 import { useData } from '../context/DataContext';
 
-const StyledGrid = styled(Grid)`
+interface StyledBlogSectionProps {
+  backgroundImage: string;
+}
 
-  @media (max-width: 599px) {
-    flex-direction: column;
+const StyledBlogSection = styled.div<StyledBlogSectionProps>`
+  display: flex;
+  gap: 30px;
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    bottom: -2px;
+    right: -2px;
+    background-image: url(${(props) => props.backgroundImage});
+    background-size: cover;
+    background-position: center;
+    filter: blur(2px);
+    z-index: -2;
   }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    bottom: -2px;
+    right: -2px;
+    background-color: black;
+    z-index: -1;
+    opacity: .3;
+  }
+
+    @media (max-width: 899px) {
+      flex-direction: column;
+  }
+`;
+
+const StyledNewestArticleTitle = styled.h3`
+  font-size: 28px;
+  margin-bottom: 20px;
+`;
+
+const StyledNewestArticleContent = styled.p`
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 10px;
+`;
+
+const StyledArticles = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+`;
+
+const StyledReadMoreButton = styled.span`
+  color: ${(props) => props.theme.palette.primary.main};
+  cursor: pointer;
 `;
 
 const BlogSection = () => {
   const { articles } = useData();
+  const newestArticle = articles.slice(0, 1)[0];
+  const latestArticles = articles.slice(1, 4);
+
   return (
     <Container>
-      <StyledGrid
-        container
-        rowSpacing={4}
-        columnSpacing={2}
-        alignItems="center"
-      >
-        {articles.map((article) => (
-          <Grid key={article.key} item xs={12} sm={6} md={4}>
+      <StyledBlogSection backgroundImage={newestArticle.image.src}>
+        <div>
+          <StyledNewestArticleTitle>{newestArticle.title}</StyledNewestArticleTitle>
+          <StyledNewestArticleContent>{newestArticle.content}</StyledNewestArticleContent>
+          <Link href={`/article/${newestArticle.id}`}>
+            <StyledReadMoreButton>
+              Czytaj dalej &gt;
+            </StyledReadMoreButton>
+          </Link>
+        </div>
+        <StyledArticles>
+          {latestArticles.map((article) => (
             <BlogCard
+              key={article.id}
               id={article.id}
               title={article.title}
-              description={article.description}
               image={article.image.src}
             />
-          </Grid>
-        ))}
-      </StyledGrid>
+          ))}
+        </StyledArticles>
+      </StyledBlogSection>
     </Container>
   );
 };
