@@ -2,9 +2,7 @@ import type { NextPage } from 'next';
 import Specs from '../components/Specs';
 
 const SpecialtiesPage: NextPage = () => (
-  <main>
-    <Specs />
-  </main>
+  <Specs />
 );
 
 export default SpecialtiesPage;

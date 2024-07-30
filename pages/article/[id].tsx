@@ -10,16 +10,14 @@ const ArticlePage: NextPage = () => {
   const currentArticle = articles.find((article) => article.id.toString() === id);
 
   return (
-    <main>
-      {currentArticle
-      && (
-      <>
-        <h1>{currentArticle.title}</h1>
-        <div>{currentArticle.content}</div>
-      </>
-      )}
-
-    </main>
+    currentArticle
+      ? (
+        <>
+          <h1>{currentArticle.title}</h1>
+          <div>{currentArticle.content}</div>
+        </>
+      )
+      : <div>Artykuł nie został znaleziony.</div>
   );
 };
 

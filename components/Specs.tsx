@@ -1,9 +1,14 @@
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
+import styled from 'styled-components';
 import { useData } from '../context/DataContext';
 import Spec from './Spec';
 import { TransformedSpec } from '../types/specTypes';
 
+const StyledGrid = styled(Grid)`
+  justify-content: center;
+  margin-bottom: 50px;
+`;
 const Specs = () => {
   const { specs } = useData();
   const specsList = specs.map((spec: TransformedSpec) => (
@@ -14,9 +19,9 @@ const Specs = () => {
 
   return (
     <Container>
-      <Grid container spacing={2}>
+      <StyledGrid container spacing={2}>
         {specsList}
-      </Grid>
+      </StyledGrid>
     </Container>
   );
 };

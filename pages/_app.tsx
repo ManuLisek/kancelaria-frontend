@@ -4,6 +4,7 @@ import { AppProps } from 'next/app';
 import { DataProvider } from '../context/DataContext';
 import theme from '../theme/theme';
 import Footer from '../components/Footer';
+import Main from '../components/Main';
 import Navbar from '../components/Nav';
 import axiosConfig from '../api/axiosConfig';
 import { TransformedArticle } from '../types/articleTypes';
@@ -24,7 +25,9 @@ const MyApp = ({ Component, pageProps }: MyAppProps) => (
   <DataProvider initialData={pageProps.initialData}>
     <ThemeProvider theme={theme}>
       <Navbar />
-      <Component {...pageProps} />
+      <Main>
+        <Component {...pageProps} />
+      </Main>
       <Footer />
     </ThemeProvider>
   </DataProvider>
