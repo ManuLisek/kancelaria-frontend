@@ -5,53 +5,44 @@ import styled from 'styled-components';
 const StyledSpec = styled(Card)`
   box-shadow: none;
   background-color: ${(props) => props.theme.palette.secondary.main};
-  padding: 20px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   text-align: center;
-  height: 100%;
+  min-height: 120px;
   cursor: pointer;
   box-sizing: border-box;
   position: relative;
-  overflow: visible;
-    
-  &::before, &::after {
-    content: '';
-    box-sizing: border-box;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    transform-origin: center;
-  }
+  overflow: hidden;
+
   &::before {
-    border-top: 4px solid ${(props) => props.theme.palette.primary.main};
-    border-bottom: 4px solid ${(props) => props.theme.palette.primary.main};
-    transform: scale3d(0,1,1);
+    position: absolute;
+    top: -150px;
+    right: -150px;
+    content: '';
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: ${(props) => props.theme.palette.primary.main};
+    transition: .5s ease;
   }
-  &::after {
-    border-left: 4px solid ${(props) => props.theme.palette.primary.main};
-    border-right: 4px solid ${(props) => props.theme.palette.primary.main};
-    transform: scale3d(1,0,1);
+
+  &:hover {
+    &::before {
+      transform: scale(10);
+    }
   }
-  &:hover::before,
-  &:hover::after {
-    transform: scale3d(1,1,1);
-    transition: transform .5s;
-  }
-  :hover > div, :hover > h3 {
-    transform: scale(1.1);
-  }
+
   @media (max-width: 599px) {
+    min-height: 108px;
     font-size: 14px;
-    padding: 12px;
   }
 `;
 
-const Title = styled.h3`
-  transition-duration: .5s;
+const StyledTitle = styled.h3`
+  z-index: 2;
 `;
 
 interface SpecProps {
@@ -62,7 +53,7 @@ interface SpecProps {
 const Spec = ({ id, name }: SpecProps): JSX.Element => (
   <Link href={`/spec/${id}`}>
     <StyledSpec>
-      <Title>{name}</Title>
+      <StyledTitle>{name}</StyledTitle>
     </StyledSpec>
   </Link>
 );

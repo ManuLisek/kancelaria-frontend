@@ -9,15 +9,16 @@ const SpecPage: NextPage = () => {
   const currentSpec = specs.find((spec) => spec.id.toString() === id);
 
   return (
-    <main>
-      {currentSpec
-        && (
-          <>
-            <h1>{currentSpec.name}</h1>
-            <div>{currentSpec.content}</div>
-          </>
-        )}
-    </main>
+
+    currentSpec
+      ? (
+        <>
+          <h1>{currentSpec.name}</h1>
+          <div>{currentSpec.content}</div>
+        </>
+      )
+      : <div>Specjalizacja nie została znaleziona.</div>
+
   );
 };
 

@@ -2,9 +2,7 @@ import type { NextPage } from 'next';
 import BlogSection from '../components/BlogSection';
 
 const BlogPage: NextPage = () => (
-  <main>
-    <BlogSection />
-  </main>
+  <BlogSection />
 );
 
 export default BlogPage;
