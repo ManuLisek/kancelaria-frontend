@@ -41,14 +41,23 @@ const StyledBlogSection = styled.div<StyledBlogSectionProps>`
     opacity: .3;
   }
 
-    @media (max-width: 899px) {
-      flex-direction: column;
+  @media (max-width: 899px) {
+    flex-direction: column;
   }
 `;
 
 const StyledNewestArticleTitle = styled.h3`
+  display: inline;
   font-size: 28px;
-  margin-bottom: 20px;
+  cursor: pointer;
+
+  @media (max-width: 599px) {
+    font-size: 20px
+  }
+`;
+
+const StyledNewestArticleDate = styled.p`
+  margin: 10px 0 20px;
 `;
 
 const StyledNewestArticleContent = styled.p`
@@ -73,15 +82,21 @@ const StyledReadMoreButton = styled.span`
 
 const BlogSection = () => {
   const { articles } = useData();
-  const newestArticle = articles.slice(0, 1)[0];
-  const latestArticles = articles.slice(1, 4);
+  const reversedArticles = articles.reverse();
+  const newestArticle = reversedArticles.slice(0, 1)[0];
+  const latestArticles = reversedArticles.slice(1, 4);
 
   return (
     <Container>
       <StyledBlogSection backgroundImage={newestArticle.image.src}>
         <div>
-          <StyledNewestArticleTitle>{newestArticle.title}</StyledNewestArticleTitle>
-          <StyledNewestArticleContent>{newestArticle.content}</StyledNewestArticleContent>
+          <Link href={`/article/${newestArticle.id}`}>
+            <StyledNewestArticleTitle>{newestArticle.title}</StyledNewestArticleTitle>
+          </Link>
+          <StyledNewestArticleDate>{newestArticle.publishedAt}</StyledNewestArticleDate>
+          <StyledNewestArticleContent>
+            {newestArticle.content[0].children[0].text}
+          </StyledNewestArticleContent>
           <Link href={`/article/${newestArticle.id}`}>
             <StyledReadMoreButton>
               Czytaj dalej &gt;
@@ -94,6 +109,7 @@ const BlogSection = () => {
               key={article.id}
               id={article.id}
               title={article.title}
+              publishedAt={article.publishedAt}
               image={article.image.src}
             />
           ))}

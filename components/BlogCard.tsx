@@ -2,7 +2,12 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 const StyledArticlesTitle = styled.h4`
+  margin-bottom: 8px;
   color: black;
+
+  @media (max-width: 599px) {
+    font-size: 14px;
+  }
 `;
 
 const StyledCard = styled.div`
@@ -22,12 +27,17 @@ const StyledCard = styled.div`
   @media (max-width: 899px) {
     width: 100%;
   }
+
+  @media (max-width: 599px) {
+    gap: 10px;
+    padding: 10px;
 `;
 
 const StyledImg = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+
 `;
 
 const StyledImgWrapper = styled.div`
@@ -41,14 +51,20 @@ const StyledImgWrapper = styled.div`
   }
 `;
 
+const StyledDate = styled.p`
+  color: black;
+  font-size: 14px;
+`;
+
 interface BlogCardProps {
   title: string;
   image: string;
   id: number;
+  publishedAt: string;
 }
 
 const BlogCard = ({
-  title, image, id,
+  title, image, id, publishedAt,
 }: BlogCardProps): JSX.Element => (
   <Link href={`/article/${id}`}>
     <StyledCard>
@@ -58,9 +74,12 @@ const BlogCard = ({
           alt={title}
         />
       </StyledImgWrapper>
-      <StyledArticlesTitle>
-        {title}
-      </StyledArticlesTitle>
+      <div>
+        <StyledArticlesTitle>
+          {title}
+        </StyledArticlesTitle>
+        <StyledDate>{publishedAt}</StyledDate>
+      </div>
     </StyledCard>
   </Link>
 );
