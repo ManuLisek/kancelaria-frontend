@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { TransformedArticle, GetArticlesResponse, GetArticleResponse } from '../types/articleTypes';
 import { TransformedSpec, GetSpecsResponse } from '../types/specTypes';
+import { formatDate } from '../helpers/formatDate';
 
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_STRAPI_URL,
@@ -23,6 +24,7 @@ export default {
             id: article.id,
             content: article.attributes.content,
             description: article.attributes.description,
+            publishedAt: formatDate(article.attributes.publishedAt.slice(0, 10)),
             image: {
               src: `${process.env.NEXT_PUBLIC_STRAPI_URL}${article.attributes.image.data.attributes.url}`,
               alt: article.attributes.image.data.attributes.alternativeText,
@@ -51,6 +53,7 @@ export default {
           id: parsedResponse.data.id,
           content: parsedResponse.data.attributes.content,
           description: parsedResponse.data.attributes.description,
+          publishedAt: parsedResponse.data.attributes.publishedAt,
           image: {
             src: `${process.env.NEXT_PUBLIC_STRAPI_URL}${parsedResponse.data.attributes.image.data.attributes.url}`,
             alt: parsedResponse.data.attributes.image.data.attributes.alternativeText,

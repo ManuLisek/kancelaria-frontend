@@ -64,68 +64,74 @@ const NavBar = () => {
   };
 
   const drawer = (
-    <StyledBox onClick={handleDrawerToggle}>
-      <Divider />
-      <List>
-        {navItems.map((item) => (
-          <ListItem key={item.pageName} disablePadding>
-            <Link href={`/${item.fileName}`} as={`/${item.routeName}`}>
-              <ListItemButton>
-                <StyledListItemText primary={item.pageName} />
-              </ListItemButton>
-            </Link>
-          </ListItem>
-        ))}
-      </List>
-    </StyledBox>
+    <nav>
+      <StyledBox onClick={handleDrawerToggle}>
+        <Divider />
+        <List>
+          {navItems.map((item) => (
+            <ListItem key={item.pageName} disablePadding>
+              <Link href={`/${item.fileName}`} as={`/${item.routeName}`}>
+                <ListItemButton>
+                  <StyledListItemText primary={item.pageName} />
+                </ListItemButton>
+              </Link>
+            </ListItem>
+          ))}
+        </List>
+      </StyledBox>
+    </nav>
+
   );
 
   return (
-    <FlexBox>
-      <StyledAppBar component="nav">
-        <StyledToolbar>
-          <Logo>
-            <Link href="/">
-              <img src={logo.src} alt="logo" />
-            </Link>
-          </Logo>
+    <nav>
+      <FlexBox>
+        <StyledAppBar component="nav">
+          <StyledToolbar>
+            <Logo>
+              <Link href="/">
+                <img src={logo.src} alt="logo" />
+              </Link>
+            </Logo>
+            <Hidden smUp>
+              <StyledIconButton
+                aria-label="open drawer"
+                edge="start"
+                onClick={handleDrawerToggle}
+              >
+                <MenuIcon />
+              </StyledIconButton>
+            </Hidden>
+            <Hidden smDown>
+              <Box>
+                {navItems.map((item) => (
+                  <Link href={`/${item.fileName}`} as={`/${item.routeName}`} key={item.pageName}>
+                    <StyledButton>
+                      {item.pageName}
+                    </StyledButton>
+                  </Link>
+                ))}
+              </Box>
+            </Hidden>
+          </StyledToolbar>
+        </StyledAppBar>
+        <Box>
           <Hidden smUp>
-            <StyledIconButton
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerToggle}
+            <Drawer
+              variant="temporary"
+              open={mobileOpen}
+              onClose={handleDrawerToggle}
+              ModalProps={{ keepMounted: true }}
             >
-              <MenuIcon />
-            </StyledIconButton>
+              <DrawerContent>
+                {drawer}
+              </DrawerContent>
+            </Drawer>
           </Hidden>
-          <Hidden smDown>
-            <Box>
-              {navItems.map((item) => (
-                <Link href={`/${item.fileName}`} as={`/${item.routeName}`} key={item.pageName}>
-                  <StyledButton>
-                    {item.pageName}
-                  </StyledButton>
-                </Link>
-              ))}
-            </Box>
-          </Hidden>
-        </StyledToolbar>
-      </StyledAppBar>
-      <Box>
-        <Hidden smUp>
-          <Drawer
-            variant="temporary"
-            open={mobileOpen}
-            onClose={handleDrawerToggle}
-            ModalProps={{ keepMounted: true }}
-          >
-            <DrawerContent>
-              {drawer}
-            </DrawerContent>
-          </Drawer>
-        </Hidden>
-      </Box>
-    </FlexBox>
+        </Box>
+      </FlexBox>
+    </nav>
+
   );
 };
 
