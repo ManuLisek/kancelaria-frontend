@@ -4,7 +4,6 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
-import Hidden from '@mui/material/Hidden';
 import IconButton from '@mui/material/IconButton';
 import Link from 'next/link';
 import List from '@mui/material/List';
@@ -13,7 +12,9 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
+import useMediaQuery from '@mui/material/useMediaQuery'; // Dodano import useMediaQuery
 import styled from 'styled-components';
+import { Container } from '@mui/material';
 import navItems from '../data/navItems';
 import logo from '../assets/images/logo.png';
 
@@ -21,10 +22,6 @@ const DrawerContent = styled.div`
   width: 240px;
   height: 100%;
   background-color: ${(props) => props.theme.palette.secondary.main};
-`;
-
-const FlexBox = styled(Box)`
-  display: flex;
 `;
 
 const Logo = styled.div`
@@ -56,44 +53,46 @@ const StyledToolbar = styled(Toolbar)`
   justify-content: space-between;
 `;
 
+const StyledDrawerContent = styled(DrawerContent)`
+  background-color: black;
+  color: ${(props) => props.theme.palette.primary.main};
+`;
+
 const NavBar = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
-
+  const isMobile = useMediaQuery('(max-width: 960px)');
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
 
   const drawer = (
-    <nav>
-      <StyledBox onClick={handleDrawerToggle}>
-        <Divider />
-        <List>
-          {navItems.map((item) => (
-            <ListItem key={item.pageName} disablePadding>
-              <Link href={`/${item.fileName}`} as={`/${item.routeName}`}>
-                <ListItemButton>
-                  <StyledListItemText primary={item.pageName} />
-                </ListItemButton>
-              </Link>
-            </ListItem>
-          ))}
-        </List>
-      </StyledBox>
-    </nav>
-
+    <StyledBox onClick={handleDrawerToggle}>
+      <Divider />
+      <List>
+        {navItems.map((item) => (
+          <ListItem key={item.pageName} disablePadding>
+            <Link href={`/${item.fileName}`} as={`/${item.routeName}`}>
+              <ListItemButton>
+                <StyledListItemText primary={item.pageName} />
+              </ListItemButton>
+            </Link>
+          </ListItem>
+        ))}
+      </List>
+    </StyledBox>
   );
 
   return (
-    <nav>
-      <FlexBox>
-        <StyledAppBar component="nav">
-          <StyledToolbar>
-            <Logo>
-              <Link href="/">
-                <img src={logo.src} alt="logo" />
-              </Link>
-            </Logo>
-            <Hidden smUp>
+    <StyledAppBar component="nav">
+      <Container>
+        <StyledToolbar>
+          <Logo>
+            <Link href="/">
+              <img src={logo.src} alt="logo" />
+            </Link>
+          </Logo>
+          {isMobile
+            ? (
               <StyledIconButton
                 aria-label="open drawer"
                 edge="start"
@@ -101,8 +100,7 @@ const NavBar = () => {
               >
                 <MenuIcon />
               </StyledIconButton>
-            </Hidden>
-            <Hidden smDown>
+            ) : (
               <Box>
                 {navItems.map((item) => (
                   <Link href={`/${item.fileName}`} as={`/${item.routeName}`} key={item.pageName}>
@@ -112,26 +110,23 @@ const NavBar = () => {
                   </Link>
                 ))}
               </Box>
-            </Hidden>
-          </StyledToolbar>
-        </StyledAppBar>
-        <Box>
-          <Hidden smUp>
-            <Drawer
-              variant="temporary"
-              open={mobileOpen}
-              onClose={handleDrawerToggle}
-              ModalProps={{ keepMounted: true }}
-            >
-              <DrawerContent>
-                {drawer}
-              </DrawerContent>
-            </Drawer>
-          </Hidden>
-        </Box>
-      </FlexBox>
-    </nav>
-
+            )}
+        </StyledToolbar>
+        {isMobile
+        && (
+          <Drawer
+            variant="temporary"
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            ModalProps={{ keepMounted: true }}
+          >
+            <StyledDrawerContent>
+              {drawer}
+            </StyledDrawerContent>
+          </Drawer>
+        )}
+      </Container>
+    </StyledAppBar>
   );
 };
 

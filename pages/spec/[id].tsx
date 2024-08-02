@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
+import { Container } from '@mui/material';
 import { useData } from '../../context/DataContext';
 
 const SpecPage: NextPage = () => {
@@ -9,15 +10,16 @@ const SpecPage: NextPage = () => {
   const currentSpec = specs.find((spec) => spec.id.toString() === id);
 
   return (
-
-    currentSpec
-      ? (
-        <>
-          <h1>{currentSpec.name}</h1>
-          <div>{currentSpec.content}</div>
-        </>
-      )
-      : <div>Specjalizacja nie została znaleziona.</div>
+    <Container>
+      { currentSpec
+        ? (
+          <>
+            <h1>{currentSpec.name}</h1>
+            <div>{currentSpec.content}</div>
+          </>
+        )
+        : <div>Specjalizacja nie została znaleziona.</div>}
+    </Container>
 
   );
 };
