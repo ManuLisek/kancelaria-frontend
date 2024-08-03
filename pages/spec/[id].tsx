@@ -1,7 +1,12 @@
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
 import { Container } from '@mui/material';
+import ReactMarkdown from 'react-markdown';
 import { useData } from '../../context/DataContext';
+import Specs from '../../components/Specs';
+import Article from '../../components/Article';
+import ArticleTitle from '../../components/ArticleTitle';
+import ArticleSeeAlso from '../../components/ArticleSeeAlso';
 
 const SpecPage: NextPage = () => {
   const router = useRouter();
@@ -10,17 +15,22 @@ const SpecPage: NextPage = () => {
   const currentSpec = specs.find((spec) => spec.id.toString() === id);
 
   return (
-    <Container>
-      { currentSpec
-        ? (
-          <>
-            <h1>{currentSpec.name}</h1>
-            <div>{currentSpec.content}</div>
-          </>
-        )
-        : <div>Specjalizacja nie została znaleziona.</div>}
-    </Container>
-
+    <>
+      <Container maxWidth="md">
+        {currentSpec
+          ? (
+            <Article>
+              <ArticleTitle>{currentSpec.name}</ArticleTitle>
+              <ReactMarkdown>{currentSpec.content}</ReactMarkdown>
+            </Article>
+          )
+          : (
+            <div>Specjalizacja nie została znaleziona.</div>
+          )}
+      </Container>
+      <ArticleSeeAlso />
+      <Specs excludeId={Number(id)} />
+    </>
   );
 };
 

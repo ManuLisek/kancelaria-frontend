@@ -2,26 +2,16 @@ import { useRouter } from 'next/router';
 import { NextPage } from 'next';
 import Container from '@mui/material/Container';
 import styled from 'styled-components';
+import ReactMarkdown from 'react-markdown';
 import { useData } from '../../context/DataContext';
 import BlogSection from '../../components/BlogSection';
-
-const StyledContainer = styled(Container)`
-  margin-bottom: 100px;
-`;
-const StyledArticleTitle = styled.h1`
-  margin-bottom: 20px;
-
-  @media (max-width: 599px) {
-    font-size: 24px;
-  }
-`;
+import { formatDate } from '../../helpers/formatDate';
+import Article from '../../components/Article';
+import ArticleTitle from '../../components/ArticleTitle';
+import ArticleSeeAlso from '../../components/ArticleSeeAlso';
 
 const StyledDate = styled.p`
   margin-bottom: 40px;
-`;
-
-const StyledArticleParagraph = styled.p`
-  margin-bottom: 20px;
 `;
 
 const StyledImgWrapper = styled.div`
@@ -41,42 +31,33 @@ const StyledImg = styled.img`
   object-fit: cover;
 `;
 
-const StyledHeader = styled.h2`
-  margin-bottom: 20px;
-`;
-
 const ArticlePage: NextPage = () => {
   const router = useRouter();
   const { id } = router.query;
   const { articles } = useData();
-
   const currentArticle = articles.find((article) => article.id.toString() === id);
-  const content = currentArticle?.content.map((paragraph) => (
-    <StyledArticleParagraph key={paragraph.children.map((child) => child.text).join('-')}>
-      {paragraph.children.map((child) => (
-        <span key={child.text}>{child.text}</span>
-      ))}
-    </StyledArticleParagraph>
-  ));
 
   return (
     <>
-      {currentArticle ? (
-        <StyledContainer maxWidth="md">
-          <StyledArticleTitle>{currentArticle.title}</StyledArticleTitle>
-          <StyledDate>{currentArticle.publishedAt}</StyledDate>
-          <StyledImgWrapper>
-            <StyledImg src={currentArticle.image.src} alt={currentArticle.image.alt} />
-          </StyledImgWrapper>
-          {content}
-        </StyledContainer>
-      ) : (
-        <div>Artykuł nie został znaleziony.</div>
-      )}
-      <Container>
-        <StyledHeader>Zobacz również</StyledHeader>
+      <Container maxWidth="md">
+        {currentArticle
+          ? (
+            <Article>
+              <ArticleTitle>{currentArticle.title}</ArticleTitle>
+              <StyledDate>{formatDate(currentArticle.publishedAt)}</StyledDate>
+              <StyledImgWrapper>
+                <StyledImg src={currentArticle.image.src} alt={currentArticle.image.alt} />
+              </StyledImgWrapper>
+              <ReactMarkdown>{currentArticle.content}</ReactMarkdown>
+            </Article>
+
+          )
+          : (
+            <div>Artykuł nie został znaleziony.</div>
+          )}
       </Container>
-      <BlogSection />
+      <ArticleSeeAlso />
+      <BlogSection excludeId={Number(id)} />
     </>
   );
 };

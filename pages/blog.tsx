@@ -3,11 +3,7 @@ import { Container } from '@mui/material';
 import styled from 'styled-components';
 import { useData } from '../context/DataContext';
 import BlogCard from '../components/BlogCard';
-
-const StyledBlogTitle = styled.h1`
-  margin-bottom: 40px;
-  text-align: center;
-`;
+import PageTitle from '../components/PageTitle';
 
 const StyledArticlesContainer = styled.div`
   display: flex;
@@ -18,12 +14,13 @@ const StyledArticlesContainer = styled.div`
 
 const BlogPage: NextPage = () => {
   const { articles } = useData();
+  const sortedArticles = articles.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
 
   return (
     <Container>
-      <StyledBlogTitle>Blog prawny</StyledBlogTitle>
+      <PageTitle>Blog prawny</PageTitle>
       <StyledArticlesContainer>
-        {articles.map((article) => (
+        {sortedArticles.map((article) => (
           <BlogCard
             key={article.id}
             id={article.id}

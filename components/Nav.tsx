@@ -12,7 +12,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
-import useMediaQuery from '@mui/material/useMediaQuery'; // Dodano import useMediaQuery
+import useMediaQuery from '@mui/material/useMediaQuery';
 import styled from 'styled-components';
 import { Container } from '@mui/material';
 import navItems from '../data/navItems';
@@ -31,6 +31,7 @@ const Logo = styled.div`
 
 const StyledAppBar = styled(AppBar)`
   background-color: ${(props) => props.theme.palette.secondary.dark};
+  border-bottom: 1px solid ${(props) => props.theme.palette.primary.main};
 ` as typeof AppBar;
 
 const StyledBox = styled(Box)`
@@ -56,6 +57,7 @@ const StyledToolbar = styled(Toolbar)`
 const StyledDrawerContent = styled(DrawerContent)`
   background-color: black;
   color: ${(props) => props.theme.palette.primary.main};
+  border-right: 1px solid ${(props) => props.theme.palette.primary.main};
 `;
 
 const NavBar = () => {

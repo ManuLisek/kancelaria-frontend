@@ -3,6 +3,7 @@ import Container from '@mui/material/Container';
 import styled from 'styled-components';
 import BlogCard from './BlogCard';
 import { useData } from '../context/DataContext';
+import { formatDate } from '../helpers/formatDate';
 
 interface StyledBlogSectionProps {
   backgroundImage: string;
@@ -80,11 +81,17 @@ const StyledReadMoreButton = styled.span`
   cursor: pointer;
 `;
 
-const BlogSection = () => {
+interface BlogSectionProps {
+  excludeId?: number;
+}
+
+const BlogSection = ({ excludeId }: BlogSectionProps) => {
   const { articles } = useData();
-  const reversedArticles = articles.reverse();
-  const newestArticle = reversedArticles.slice(0, 1)[0];
-  const latestArticles = reversedArticles.slice(1, 4);
+  const sortedArticles = articles
+    .filter((article) => article.id !== excludeId)
+    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+  const newestArticle = sortedArticles[0];
+  const latestArticles = sortedArticles.slice(1, 4);
 
   return (
     <Container>
@@ -93,9 +100,9 @@ const BlogSection = () => {
           <Link href={`/article/${newestArticle.id}`}>
             <StyledNewestArticleTitle>{newestArticle.title}</StyledNewestArticleTitle>
           </Link>
-          <StyledNewestArticleDate>{newestArticle.publishedAt}</StyledNewestArticleDate>
+          <StyledNewestArticleDate>{formatDate(newestArticle.publishedAt)}</StyledNewestArticleDate>
           <StyledNewestArticleContent>
-            {newestArticle.content[0].children[0].text}
+            {newestArticle.content}
           </StyledNewestArticleContent>
           <Link href={`/article/${newestArticle.id}`}>
             <StyledReadMoreButton>

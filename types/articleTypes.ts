@@ -12,22 +12,8 @@ export interface ImageData {
   }
 }
 
-interface TextNode {
-  type: 'text';
-  text: string;
-}
-
-type ChildNode = TextNode;
-
-interface ParagraphNode {
-  type: 'paragraph';
-  children: ChildNode[];
-}
-
-type ContentNode = ParagraphNode;
-
 export interface ArticleAttributes {
-  content: ContentNode[];
+  content: string;
   description: string;
   title: string;
   publishedAt: string;
@@ -51,7 +37,7 @@ export interface TransformedArticle {
   key: number;
   title: string;
   id: number;
-  content: ParagraphNode[];
+  content: string;
   description: string;
   publishedAt: string;
   image: Image;
