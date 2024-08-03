@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styled from 'styled-components';
+import { formatDate } from '../helpers/formatDate';
 
 const StyledArticlesTitle = styled.h4`
   margin-bottom: 8px;
@@ -78,7 +79,7 @@ const BlogCard = ({
         <StyledArticlesTitle>
           {title}
         </StyledArticlesTitle>
-        <StyledDate>{publishedAt}</StyledDate>
+        <StyledDate>{formatDate(publishedAt)}</StyledDate>
       </div>
     </StyledCard>
   </Link>

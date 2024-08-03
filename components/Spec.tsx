@@ -1,10 +1,8 @@
 import Link from 'next/link';
-import Card from '@mui/material/Card';
 import styled from 'styled-components';
 
-const StyledSpec = styled(Card)`
+const StyledSpec = styled.div`
   box-shadow: none;
-  background-color: ${(props) => props.theme.palette.secondary.main};
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -12,8 +10,8 @@ const StyledSpec = styled(Card)`
   align-items: center;
   text-align: center;
   min-height: 120px;
+  border: 1px solid ${(props) => props.theme.palette.primary.main};
   cursor: pointer;
-  box-sizing: border-box;
   position: relative;
   overflow: hidden;
 

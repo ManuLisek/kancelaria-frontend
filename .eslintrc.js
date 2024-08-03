@@ -20,6 +20,8 @@ module.exports = {
     "linebreak-style": "off",
     "import/prefer-default-export": "off",
     "react/function-component-definition": [2, { "namedComponents": "arrow-function" }],
+    'max-len': ['error', { code: 120 }],
+    "react/require-default-props": "off"
   },
   settings: {
     react: {

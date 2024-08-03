@@ -1,9 +1,8 @@
 import type { NextPage } from 'next';
+import PageTitle from '../components/PageTitle';
 
 const ContactPage: NextPage = () => (
-  <>
-    Contact
-  </>
+  <PageTitle>Kontakt</PageTitle>
 );
 
 export default ContactPage;
