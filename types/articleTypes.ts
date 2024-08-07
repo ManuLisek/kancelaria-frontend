@@ -14,9 +14,9 @@ export interface ImageData {
 
 export interface ArticleAttributes {
   content: string;
-  description: string;
   title: string;
   publishedAt: string;
+  slug: string;
   image: ImageData;
 }
 
@@ -38,7 +38,7 @@ export interface TransformedArticle {
   title: string;
   id: number;
   content: string;
-  description: string;
   publishedAt: string;
+  slug: string;
   image: Image;
 }

@@ -20,7 +20,7 @@ const Specs = ({ excludeId }: SpecsProps) => {
   const filteredSpecs = excludeId ? specs.filter((spec: TransformedSpec) => spec.id !== excludeId) : specs;
   const specsList = filteredSpecs.map((spec: TransformedSpec) => (
     <Grid key={spec.id} item xs={6} sm={4}>
-      <Spec id={spec.id} name={spec.name} />
+      <Spec slug={spec.slug} name={spec.name} />
     </Grid>
   ));
 

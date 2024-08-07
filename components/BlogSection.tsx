@@ -97,14 +97,14 @@ const BlogSection = ({ excludeId }: BlogSectionProps) => {
     <Container>
       <StyledBlogSection backgroundImage={newestArticle.image.src}>
         <div>
-          <Link href={`/article/${newestArticle.id}`}>
+          <Link href={`/blog-prawny/${newestArticle.slug}`}>
             <StyledNewestArticleTitle>{newestArticle.title}</StyledNewestArticleTitle>
           </Link>
           <StyledNewestArticleDate>{formatDate(newestArticle.publishedAt)}</StyledNewestArticleDate>
           <StyledNewestArticleContent>
             {newestArticle.content}
           </StyledNewestArticleContent>
-          <Link href={`/article/${newestArticle.id}`}>
+          <Link href={`/blog-prawny/${newestArticle.slug}`}>
             <StyledReadMoreButton>
               Czytaj dalej &gt;
             </StyledReadMoreButton>
@@ -114,7 +114,7 @@ const BlogSection = ({ excludeId }: BlogSectionProps) => {
           {latestArticles.map((article) => (
             <BlogCard
               key={article.id}
-              id={article.id}
+              slug={article.slug}
               title={article.title}
               publishedAt={article.publishedAt}
               image={article.image.src}

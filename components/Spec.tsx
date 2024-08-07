@@ -44,12 +44,12 @@ const StyledTitle = styled.h3`
 `;
 
 interface SpecProps {
-  id: number;
+  slug: string;
   name: string;
 }
 
-const Spec = ({ id, name }: SpecProps): JSX.Element => (
-  <Link href={`/spec/${id}`}>
+const Spec = ({ slug, name }: SpecProps): JSX.Element => (
+  <Link href={`/specjalizacje/${slug}`}>
     <StyledSpec>
       <StyledTitle>{name}</StyledTitle>
     </StyledSpec>

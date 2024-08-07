@@ -22,8 +22,8 @@ export default {
             title: article.attributes.title,
             id: article.id,
             content: article.attributes.content,
-            description: article.attributes.description,
             publishedAt: article.attributes.publishedAt.slice(0, 10),
+            slug: article.attributes.slug,
             image: {
               src: `${process.env.NEXT_PUBLIC_STRAPI_URL}${article.attributes.image.data.attributes.url}`,
               alt: article.attributes.image.data.attributes.alternativeText,
@@ -51,8 +51,8 @@ export default {
           title: parsedResponse.data.attributes.title,
           id: parsedResponse.data.id,
           content: parsedResponse.data.attributes.content,
-          description: parsedResponse.data.attributes.description,
-          publishedAt: parsedResponse.data.attributes.publishedAt,
+          publishedAt: parsedResponse.data.attributes.publishedAt.slice(0, 10),
+          slug: parsedResponse.data.attributes.slug,
           image: {
             src: `${process.env.NEXT_PUBLIC_STRAPI_URL}${parsedResponse.data.attributes.image.data.attributes.url}`,
             alt: parsedResponse.data.attributes.image.data.attributes.alternativeText,
@@ -80,6 +80,7 @@ export default {
             id: spec.id,
             content: spec.attributes.content,
             name: spec.attributes.name,
+            slug: spec.attributes.slug,
           }),
         );
         return {
@@ -103,6 +104,7 @@ export default {
           id: parsedResponse.id,
           content: parsedResponse.content,
           name: parsedResponse.name,
+          slug: parsedResponse.slug,
         };
         return {
           spec: transformedSpec,

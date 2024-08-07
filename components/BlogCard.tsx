@@ -60,14 +60,14 @@ const StyledDate = styled.p`
 interface BlogCardProps {
   title: string;
   image: string;
-  id: number;
+  slug: string;
   publishedAt: string;
 }
 
 const BlogCard = ({
-  title, image, id, publishedAt,
+  title, image, slug, publishedAt,
 }: BlogCardProps): JSX.Element => (
-  <Link href={`/article/${id}`}>
+  <Link href={`/blog-prawny/${slug}`}>
     <StyledCard>
       <StyledImgWrapper>
         <StyledImg

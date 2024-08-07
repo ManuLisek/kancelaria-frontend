@@ -6,8 +6,14 @@ import AboutMeSection from '../components/AboutMeSection';
 import BlogSection from '../components/BlogSection';
 import Divider from '../components/Divider';
 import Specs from '../components/Specs';
-import books from '../assets/images/books.jpg';
 import sculpture from '../assets/images/sculpture.jpg';
+
+const Title = styled.h2`
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+`;
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -20,12 +26,14 @@ const ButtonContainer = styled.div`
 const HomePage: NextPage = () => (
   <>
     <AboutMeSection />
-    <Divider image={books.src} title="Specjalizacje" />
+    <Link href="/pomoc-prawna-online" passHref>
+      <Divider image={sculpture.src} title="Potrzebujesz pomocy prawnej online? Skontaktuj się ze mną." />
+    </Link>
+    <Title>Specjalizacje</Title>
     <Specs />
-    <Divider image={sculpture.src} title="Potrzebujesz pomocy prawnej online? Skontaktuj się ze mną" />
     <BlogSection />
     <ButtonContainer>
-      <Link href="/blog" passHref>
+      <Link href="/blog-prawny" passHref>
         <Button text="Więcej" />
       </Link>
     </ButtonContainer>
