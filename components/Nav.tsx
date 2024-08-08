@@ -73,7 +73,7 @@ const NavBar = () => {
       <List>
         {navItems.map((item) => (
           <ListItem key={item.pageName} disablePadding>
-            <Link href={`/${item.fileName}`} as={`/${item.routeName}`}>
+            <Link href={`/${item.routeName}`}>
               <ListItemButton>
                 <StyledListItemText primary={item.pageName} />
               </ListItemButton>
@@ -105,7 +105,7 @@ const NavBar = () => {
             ) : (
               <Box>
                 {navItems.map((item) => (
-                  <Link href={`/${item.fileName}`} as={`/${item.routeName}`} key={item.pageName}>
+                  <Link href={`/${item.routeName}`} key={item.pageName}>
                     <StyledButton>
                       {item.pageName}
                     </StyledButton>

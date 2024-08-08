@@ -16,16 +16,18 @@ const StyledFooter = styled.footer`
   border-top: 1px solid ${(props) => props.theme.palette.primary.main};
 `;
 
+const StyledLink = styled.a`
+  display: block;
+  margin-bottom: 10px;
+  text-align: left;
+  font-size: 18px;
+  font-weight: bold;
+`;
+
 const Image = styled.img`
   margin-right: 10px;
   width: 46px;
   height: 46px;
-`;
-
-const Title = styled.h2`
-  margin-bottom: 10px;
-  text-align: left;
-  font-size: 18px;
 `;
 
 const FlexContainer = styled.div`
@@ -39,6 +41,13 @@ const Paragraph = styled.p`
   gap: 10px;
   margin-bottom: 10px;
   font-size: 14px;
+`;
+
+const StyledContentSpan = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
 `;
 
 const MediaContainer = styled.div`
@@ -78,6 +87,7 @@ const ListItem = styled.li`
   margin-bottom: 5px;
   font-size: 14px;
   list-style-type: none;
+  cursor: pointer;
 `;
 
 const AllRightsContainer = styled.div`
@@ -94,7 +104,7 @@ const Footer = (): JSX.Element => {
   const { specs } = useData();
 
   const specsList = specs.map((spec) => (
-    <Link href={`/spec/${spec.id}`} key={spec.id}>
+    <Link href={`/specjalizacje/${spec.slug}`} key={spec.id}>
       <ListItem>
         {spec.name}
       </ListItem>
@@ -108,7 +118,7 @@ const Footer = (): JSX.Element => {
           <Grid item xs={12} sm={4}>
             <FlexContainer>
               <Image src={logo.src} alt="logo" />
-              <Title>Lorem Ipsum</Title>
+              <StyledLink>Lorem Ipsum</StyledLink>
             </FlexContainer>
             <Paragraph>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam posuere consequat
@@ -116,12 +126,20 @@ const Footer = (): JSX.Element => {
               tempor.
             </Paragraph>
             <MediaContainer>
-              <StyledFacebookIcon />
+              <a
+                href="https://www.facebook.com/p/Kancelaria-Adwokacka-Adwokat-Wiktoria-Sendzik-100086098846467/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <StyledFacebookIcon />
+              </a>
               <StyledInstagramIcon />
             </MediaContainer>
           </Grid>
           <Grid item xs={12} sm={4}>
-            <Title>Specjalizacje</Title>
+            <Link href="/specjalizacje" passHref>
+              <StyledLink>Specjalizacje</StyledLink>
+            </Link>
             <FlexContainer>
               <List>
                 {specsList}
@@ -129,18 +147,35 @@ const Footer = (): JSX.Element => {
             </FlexContainer>
           </Grid>
           <Grid item xs={12} sm={4}>
-            <Title>Kontakt</Title>
+            <Link href="/kontakt" passHref>
+              <StyledLink>
+                Kontakt
+              </StyledLink>
+            </Link>
             <Paragraph>
-              <StyledLocationIcon />
-              Iławska 16/17, Iława
+              <Link href="/kontakt" passHref>
+                <StyledContentSpan>
+                  <StyledLocationIcon />
+                  ul. Wyszyńskiego 5,
+                  14-200 Iława
+                </StyledContentSpan>
+              </Link>
             </Paragraph>
             <Paragraph>
-              <StyledPhoneIcon />
-              666 666 666
+              <a href="tel:+48605899236">
+                <StyledContentSpan>
+                  <StyledPhoneIcon />
+                  +48 605 899 236
+                </StyledContentSpan>
+              </a>
             </Paragraph>
             <Paragraph>
-              <StyledMailIcon />
-              wiktoriasendzik@gmail.com
+              <a href="mailto:adwokat.wiktoriasendzik@gmail.com">
+                <StyledContentSpan>
+                  <StyledMailIcon />
+                  adwokat.wiktoriasendzik@gmail.com
+                </StyledContentSpan>
+              </a>
             </Paragraph>
           </Grid>
         </Grid>

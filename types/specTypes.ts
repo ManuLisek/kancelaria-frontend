@@ -1,6 +1,7 @@
 export interface SpecAttributes {
   content: string;
   name: string;
+  slug: string;
 }
 
 export interface Spec {
@@ -17,4 +18,5 @@ export interface TransformedSpec {
   id: number;
   content: string;
   name: string;
+  slug: string;
 }

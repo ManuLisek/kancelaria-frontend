@@ -23,7 +23,7 @@ const BlogPage: NextPage = () => {
         {sortedArticles.map((article) => (
           <BlogCard
             key={article.id}
-            id={article.id}
+            slug={article.slug}
             title={article.title}
             publishedAt={article.publishedAt}
             image={article.image.src}
