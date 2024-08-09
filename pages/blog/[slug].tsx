@@ -2,11 +2,11 @@ import { NextPage, GetStaticPaths, GetStaticProps } from 'next';
 import Container from '@mui/material/Container';
 import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
-import BlogSection from '../../components/BlogSection';
+import BlogSection from '../../components/Blog/BlogSection';
 import { formatDate } from '../../helpers/formatDate';
-import Article from '../../components/Article';
-import ArticleTitle from '../../components/ArticleTitle';
-import ArticleSeeAlso from '../../components/ArticleSeeAlso';
+import Article from '../../components/Blog/Article/Article';
+import ArticleTitle from '../../components/Blog/Article/ArticleTitle';
+import ArticleSeeAlso from '../../components/Blog/Article/ArticleSeeAlso';
 import axiosConfig from '../../api/axiosConfig';
 
 const StyledDate = styled.p`

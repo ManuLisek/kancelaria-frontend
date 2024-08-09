@@ -15,8 +15,8 @@ import Toolbar from '@mui/material/Toolbar';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import styled from 'styled-components';
 import { Container } from '@mui/material';
-import navItems from '../data/navItems';
-import logo from '../assets/images/logo.png';
+import navItems from '../../data/navItems';
+import logo from '../../assets/images/logo.png';
 
 const DrawerContent = styled.div`
   width: 240px;

@@ -1,6 +1,6 @@
 import Container from '@mui/material/Container';
 import styled from 'styled-components';
-import me from '../assets/images/me.jpg';
+import me from '../../assets/images/me.jpg';
 
 const Title = styled.h2`
   margin-bottom: 20px;

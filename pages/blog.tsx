@@ -2,8 +2,8 @@ import type { NextPage } from 'next';
 import { Container } from '@mui/material';
 import styled from 'styled-components';
 import { useData } from '../context/DataContext';
-import BlogCard from '../components/BlogCard';
-import PageTitle from '../components/PageTitle';
+import BlogCard from '../components/Blog/BlogCard';
+import PageTitle from '../components/Common/PageTitle';
 
 const StyledArticlesContainer = styled.div`
   display: flex;
