@@ -21,7 +21,8 @@ module.exports = {
     "import/prefer-default-export": "off",
     "react/function-component-definition": [2, { "namedComponents": "arrow-function" }],
     'max-len': ['error', { code: 130 }],
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "no-underscore-dangle": "off",
   },
   settings: {
     react: {

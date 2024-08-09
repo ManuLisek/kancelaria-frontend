@@ -1,10 +1,10 @@
 import { NextPage, GetStaticPaths, GetStaticProps } from 'next';
 import { Container } from '@mui/material';
 import ReactMarkdown from 'react-markdown';
-import Specs from '../../components/Specs';
-import Article from '../../components/Article';
-import ArticleTitle from '../../components/ArticleTitle';
-import ArticleSeeAlso from '../../components/ArticleSeeAlso';
+import Specs from '../../components/Spec/Specs';
+import Article from '../../components/Blog/Article/Article';
+import ArticleTitle from '../../components/Blog/Article/ArticleTitle';
+import ArticleSeeAlso from '../../components/Blog/Article/ArticleSeeAlso';
 import axiosConfig from '../../api/axiosConfig';
 
 interface Spec {

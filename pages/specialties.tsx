@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
-import Specs from '../components/Specs';
-import PageTitle from '../components/PageTitle';
+import Specs from '../components/Spec/Specs';
+import PageTitle from '../components/Common/PageTitle';
 
 const SpecialtiesPage: NextPage = () => (
   <>

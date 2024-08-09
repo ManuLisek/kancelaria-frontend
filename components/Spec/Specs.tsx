@@ -2,9 +2,9 @@ import React from 'react';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import styled from 'styled-components';
-import { useData } from '../context/DataContext';
+import { useData } from '../../context/DataContext';
 import Spec from './Spec';
-import { TransformedSpec } from '../types/specTypes';
+import { TransformedSpec } from '../../types/specTypes';
 
 const StyledGrid = styled(Grid)`
   justify-content: center;

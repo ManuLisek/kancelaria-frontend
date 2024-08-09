@@ -2,8 +2,8 @@ import Link from 'next/link';
 import Container from '@mui/material/Container';
 import styled from 'styled-components';
 import BlogCard from './BlogCard';
-import { useData } from '../context/DataContext';
-import { formatDate } from '../helpers/formatDate';
+import { useData } from '../../context/DataContext';
+import { formatDate } from '../../helpers/formatDate';
 
 interface StyledBlogSectionProps {
   backgroundImage: string;

@@ -1,11 +1,11 @@
 import type { NextPage } from 'next';
 import styled from 'styled-components';
 import Link from 'next/link';
-import Button from '../components/Button';
-import AboutMeSection from '../components/AboutMeSection';
-import BlogSection from '../components/BlogSection';
-import Divider from '../components/Divider';
-import Specs from '../components/Specs';
+import Button from '../components/Common/Button';
+import AboutMeSection from '../components/Common/AboutMeSection';
+import BlogSection from '../components/Blog/BlogSection';
+import Divider from '../components/Common/Divider';
+import Specs from '../components/Spec/Specs';
 import sculpture from '../assets/images/sculpture.jpg';
 
 const Title = styled.h2`

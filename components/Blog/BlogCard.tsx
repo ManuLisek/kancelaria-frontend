@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import styled from 'styled-components';
-import { formatDate } from '../helpers/formatDate';
+import { formatDate } from '../../helpers/formatDate';
 
 const StyledArticlesTitle = styled.h4`
   margin-bottom: 8px;

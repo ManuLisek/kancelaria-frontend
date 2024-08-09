@@ -3,12 +3,12 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import styled from 'styled-components';
 import FacebookIcon from '@mui/icons-material/Facebook';
-import LocationIcon from '@mui/icons-material/LocationOn';
-import MailIcon from '@mui/icons-material/Mail';
 import InstagramIcon from '@mui/icons-material/Instagram';
-import PhoneIcon from '@mui/icons-material/Phone';
-import logo from '../assets/images/logo.png';
-import { useData } from '../context/DataContext';
+import logo from '../../assets/images/logo.png';
+import { useData } from '../../context/DataContext';
+import Address from '../Common/Address';
+import Phone from '../Common/Phone';
+import Email from '../Common/Email';
 
 const StyledFooter = styled.footer`
   height: fit-content;
@@ -41,13 +41,10 @@ const Paragraph = styled.p`
   gap: 10px;
   margin-bottom: 10px;
   font-size: 14px;
-`;
 
-const StyledContentSpan = styled.span`
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
+  span {
+    cursor: pointer;
+  }
 `;
 
 const MediaContainer = styled.div`
@@ -61,18 +58,6 @@ const StyledFacebookIcon = styled(FacebookIcon)`
 
 const StyledInstagramIcon = styled(InstagramIcon)`
   color: #f58529;
-`;
-
-const StyledLocationIcon = styled(LocationIcon)`
-  color: ${(props) => props.theme.palette.primary.main};
-`;
-
-const StyledPhoneIcon = styled(PhoneIcon)`
-  color: ${(props) => props.theme.palette.primary.main};
-`;
-
-const StyledMailIcon = styled(MailIcon)`
-  color: ${(props) => props.theme.palette.primary.main};
 `;
 
 const List = styled.ul`
@@ -115,7 +100,7 @@ const Footer = (): JSX.Element => {
     <StyledFooter>
       <Container>
         <Grid container spacing={4}>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} md={4}>
             <FlexContainer>
               <Image src={logo.src} alt="logo" />
               <StyledLink>Lorem Ipsum</StyledLink>
@@ -153,29 +138,13 @@ const Footer = (): JSX.Element => {
               </StyledLink>
             </Link>
             <Paragraph>
-              <Link href="/kontakt" passHref>
-                <StyledContentSpan>
-                  <StyledLocationIcon />
-                  ul. Wyszyńskiego 5,
-                  14-200 Iława
-                </StyledContentSpan>
-              </Link>
+              <Address href="/kontakt" />
             </Paragraph>
             <Paragraph>
-              <a href="tel:+48605899236">
-                <StyledContentSpan>
-                  <StyledPhoneIcon />
-                  +48 605 899 236
-                </StyledContentSpan>
-              </a>
+              <Phone />
             </Paragraph>
             <Paragraph>
-              <a href="mailto:adwokat.wiktoriasendzik@gmail.com">
-                <StyledContentSpan>
-                  <StyledMailIcon />
-                  adwokat.wiktoriasendzik@gmail.com
-                </StyledContentSpan>
-              </a>
+              <Email />
             </Paragraph>
           </Grid>
         </Grid>
