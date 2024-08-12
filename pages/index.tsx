@@ -6,6 +6,7 @@ import AboutMeSection from '../components/Common/AboutMeSection';
 import BlogSection from '../components/Blog/BlogSection';
 import Divider from '../components/Common/Divider';
 import Specs from '../components/Spec/Specs';
+import HeroSection from '../components/Common/HeroSection';
 import sculpture from '../assets/images/sculpture.jpg';
 
 const Title = styled.h2`
@@ -25,6 +26,7 @@ const ButtonContainer = styled.div`
 
 const HomePage: NextPage = () => (
   <>
+    <HeroSection />
     <AboutMeSection />
     <Link href="/pomoc-prawna-online" passHref>
       <Divider image={sculpture.src} title="Potrzebujesz pomocy prawnej online? Skontaktuj się ze mną." />
