@@ -5,7 +5,7 @@ import { DataProvider } from '../context/DataContext';
 import theme from '../theme/theme';
 import Footer from '../components/Layout/Footer';
 import Main from '../components/Layout/Main';
-import Navbar from '../components/Layout/Nav';
+import Header from '../components/Layout/Header';
 import axiosConfig from '../api/axiosConfig';
 import { TransformedArticle } from '../types/articleTypes';
 import { TransformedSpec } from '../types/specTypes';
@@ -24,7 +24,7 @@ export interface MyAppProps extends AppProps {
 const MyApp = ({ Component, pageProps }: MyAppProps) => (
   <DataProvider initialData={pageProps.initialData}>
     <ThemeProvider theme={theme}>
-      <Navbar />
+      <Header />
       <Main>
         <Component {...pageProps} />
       </Main>
