@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -15,9 +16,8 @@ import Toolbar from '@mui/material/Toolbar';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import styled from 'styled-components';
 import { Container } from '@mui/material';
-import { useRouter } from 'next/router';
+import Logo from '../Common/Logo';
 import navItems from '../../data/navItems';
-import logo from '../../assets/images/logo.png';
 
 const AppBarSpacer = styled.div`
   height: 70px;
@@ -27,11 +27,6 @@ const DrawerContent = styled.div`
   width: 240px;
   height: 100%;
   background-color: ${(props) => props.theme.palette.secondary.main};
-`;
-
-const Logo = styled.div`
-  margin: 10px 0;
-  cursor: pointer;
 `;
 
 const StyledListItemButton = styled(ListItemButton)`
@@ -150,16 +145,11 @@ const Header = () => {
   );
 
   return (
-
     <>
       <StyledAppBar className={`${isHeaderVisible ? 'active' : ''} ${isHeaderTop ? 'top' : ''}`} component="header">
         <Container>
           <StyledToolbar>
-            <Logo>
-              <Link href="/">
-                <img src={logo.src} alt="logo" />
-              </Link>
-            </Logo>
+            <Logo />
             {isMobile
               ? (
                 <StyledIconButton

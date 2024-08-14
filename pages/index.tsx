@@ -1,13 +1,13 @@
 import type { NextPage } from 'next';
 import styled from 'styled-components';
 import Link from 'next/link';
+import sculpture from 'public/sculpture.jpg';
 import Button from '../components/Common/Button';
 import AboutMeSection from '../components/Common/AboutMeSection';
 import BlogSection from '../components/Blog/BlogSection';
 import Divider from '../components/Common/Divider';
 import Specs from '../components/Spec/Specs';
 import HeroSection from '../components/Common/HeroSection';
-import sculpture from '../assets/images/sculpture.jpg';
 
 const Title = styled.h2`
   margin-bottom: 20px;

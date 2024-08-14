@@ -1,50 +1,49 @@
 import Link from 'next/link';
 import Container from '@mui/material/Container';
 import styled from 'styled-components';
+import Image from 'next/image';
 import BlogCard from './BlogCard';
 import { useData } from '../../context/DataContext';
 import { formatDate } from '../../helpers/formatDate';
 
-interface StyledBlogSectionProps {
-  backgroundImage: string;
-}
-
-const StyledBlogSection = styled.div<StyledBlogSectionProps>`
+const StyledBlogSection = styled.div`
   display: flex;
   gap: 30px;
   position: relative;
   overflow: hidden;
   padding: 20px;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    bottom: -2px;
-    right: -2px;
-    background-image: url(${(props) => props.backgroundImage});
-    background-size: cover;
-    background-position: center;
-    filter: blur(2px);
-    z-index: -2;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    bottom: -2px;
-    right: -2px;
-    background-color: black;
-    z-index: -1;
-    opacity: .3;
-  }
-
   @media (max-width: 899px) {
     flex-direction: column;
   }
+`;
+
+const StyledWrapperImage = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    filter: blur(2px);
+
+    &:before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+      content: "";
+      background-color: black;
+      opacity: .6;
+    }
+  }
+`;
+
+const StyledContent = styled.div`
+  position: relative;
+  z-index: 1;
 `;
 
 const StyledNewestArticleTitle = styled.h3`
@@ -95,8 +94,11 @@ const BlogSection = ({ excludeId }: BlogSectionProps) => {
 
   return (
     <Container>
-      <StyledBlogSection backgroundImage={newestArticle.image.src}>
-        <div>
+      <StyledBlogSection>
+        <StyledWrapperImage>
+          <Image src={newestArticle.image.src} alt={newestArticle.title} layout="fill" objectFit="cover" />
+        </StyledWrapperImage>
+        <StyledContent>
           <Link href={`/blog-prawny/${newestArticle.slug}`}>
             <StyledNewestArticleTitle>{newestArticle.title}</StyledNewestArticleTitle>
           </Link>
@@ -109,7 +111,7 @@ const BlogSection = ({ excludeId }: BlogSectionProps) => {
               Czytaj dalej &gt;
             </StyledReadMoreButton>
           </Link>
-        </div>
+        </StyledContent>
         <StyledArticles>
           {latestArticles.map((article) => (
             <BlogCard

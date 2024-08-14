@@ -14,12 +14,14 @@ const StyledDate = styled.p`
 `;
 
 const StyledImgWrapper = styled.div`
-  width: 540px;
+  width: 100%;
+  max-width: 540px;
   height: 400px;
   margin: 0 auto 40px;
 
   @media (max-width: 599px) {
-    width: 280px;
+    width: 100%;
+    max-width: 280px;
     height: 200px;
   }
 `;

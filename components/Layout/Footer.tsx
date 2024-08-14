@@ -4,11 +4,11 @@ import Grid from '@mui/material/Grid';
 import styled from 'styled-components';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
-import logo from '../../assets/images/logo.png';
 import { useData } from '../../context/DataContext';
 import Address from '../Common/Address';
 import Phone from '../Common/Phone';
 import Email from '../Common/Email';
+import Logo from '../Common/Logo';
 
 const StyledFooter = styled.footer`
   height: fit-content;
@@ -24,22 +24,17 @@ const StyledLink = styled.a`
   font-weight: bold;
 `;
 
-const Image = styled.img`
-  margin-right: 10px;
-  width: 46px;
-  height: 46px;
-`;
-
 const FlexContainer = styled.div`
   display: flex;
   align-items: center;
+  gap: 20px;
 `;
 
 const Paragraph = styled.p`
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 10px;
+  margin: 5px 0;
   font-size: 14px;
 
   span {
@@ -83,7 +78,7 @@ const AllRightsContainer = styled.div`
 
 const copyRightSymbol = String.fromCodePoint(0xA9);
 const currentYear = new Date().getFullYear();
-const allRightsReserved = `${copyRightSymbol} XXXX-${currentYear} Wika. Wszelkie prawa zastrzeżone.`;
+const allRightsReserved = `${copyRightSymbol} ${currentYear}. Wszelkie prawa zastrzeżone.`;
 
 const Footer = (): JSX.Element => {
   const { specs } = useData();
@@ -102,19 +97,24 @@ const Footer = (): JSX.Element => {
         <Grid container spacing={4}>
           <Grid item xs={12} md={4}>
             <FlexContainer>
-              <Image src={logo.src} alt="logo" />
-              <StyledLink>Lorem Ipsum</StyledLink>
+              <Logo />
+              <Link href="/" passHref>
+                <StyledLink>
+                  Kancelaria Adwokacka -
+                  <br />
+                  Adwokat Wiktoria Sendzik
+                </StyledLink>
+              </Link>
             </FlexContainer>
             <Paragraph>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam posuere consequat
-              nunc sit amet mollis. Maecenas mattis odio maximus tellus tempus, in pulvinar purus
-              tempor.
+              Dowiedz się więcej z moich mediów społecznościowych.
             </Paragraph>
             <MediaContainer>
               <a
                 href="https://www.facebook.com/p/Kancelaria-Adwokacka-Adwokat-Wiktoria-Sendzik-100086098846467/"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Facebok"
               >
                 <StyledFacebookIcon />
               </a>
