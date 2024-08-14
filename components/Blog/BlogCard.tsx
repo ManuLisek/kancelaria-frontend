@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styled from 'styled-components';
+import Image from 'next/image';
 import { formatDate } from '../../helpers/formatDate';
 
 const StyledArticlesTitle = styled.h4`
@@ -12,6 +13,7 @@ const StyledArticlesTitle = styled.h4`
 `;
 
 const StyledCard = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   gap: 20px;
@@ -20,6 +22,7 @@ const StyledCard = styled.div`
   background-color: white;
   opacity: .9;
   cursor: pointer;
+  z-index: 1;
 
   &:hover {
     opacity: 1;
@@ -34,14 +37,8 @@ const StyledCard = styled.div`
     padding: 10px;
 `;
 
-const StyledImg = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-
-`;
-
 const StyledImgWrapper = styled.div`
+  position: relative;
   width: 130px;
   height: 86px;
   flex-shrink: 0;
@@ -70,9 +67,11 @@ const BlogCard = ({
   <Link href={`/blog-prawny/${slug}`}>
     <StyledCard>
       <StyledImgWrapper>
-        <StyledImg
+        <Image
           src={image}
           alt={title}
+          layout="fill"
+          objectFit="cover"
         />
       </StyledImgWrapper>
       <div>

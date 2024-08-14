@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Container } from '@mui/material';
-import me from '../../assets/images/me.jpg';
+import Image from 'next/image';
+import me from 'public/me.jpg';
 
 const Title = styled.h2`
   margin-bottom: 20px;
@@ -21,10 +22,8 @@ const StyledFlexContainer = styled(Container)`
 `;
 
 const StyledImageWrapper = styled.div`
+  position: relative;
   flex: 1 1 0;
-  background-image: url(${me.src});
-  background-size: cover;
-  background-position: center center;
   border: 4px solid ${(props) => props.theme.palette.primary.main};
 
   @media (max-width: 899px) {
@@ -42,20 +41,6 @@ const StyledInfoWrapper = styled.div`
   }
 `;
 
-// const Image = styled.img`
-//   display: block;
-//   float: left;
-//   width: 220px;
-//   height: auto;
-//   margin-right: 20px;
-//   border: 6px solid ${(props) => props.theme.palette.primary.main};
-
-//   @media (max-width: 599px) {
-//     float: none;
-//     margin: 0 auto 20px;
-//   }
-// `;
-
 const Paragraph = styled.p`
   margin-bottom: 20px;
 `;
@@ -64,8 +49,9 @@ const AboutMeSection = (): JSX.Element => (
   <>
     <Title>O mnie</Title>
     <StyledFlexContainer>
-      <StyledImageWrapper />
-      {/* <Image src={me.src} alt="me" /> */}
+      <StyledImageWrapper>
+        <Image src={me.src} alt="Moje zdjęcie" layout="fill" objectFit="cover" />
+      </StyledImageWrapper>
       <StyledInfoWrapper>
         <Paragraph>
           Adwokat Wiktoria Sendzik- jestem absolwentką Uniwersytetu Warmińsko-Mazurskiego w Olsztynie
