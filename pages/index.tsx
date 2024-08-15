@@ -33,6 +33,7 @@ const HomePage: NextPage = () => (
     </Link>
     <Title>Specjalizacje</Title>
     <Specs />
+    <Title>Blog prawny</Title>
     <BlogSection />
     <ButtonContainer>
       <Link href="/blog-prawny" passHref>

@@ -2,6 +2,7 @@ import { NextPage, GetStaticPaths, GetStaticProps } from 'next';
 import Container from '@mui/material/Container';
 import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
+import Image from 'next/image';
 import BlogSection from '../../components/Blog/BlogSection';
 import { formatDate } from '../../helpers/formatDate';
 import Article from '../../components/Blog/Article/Article';
@@ -14,6 +15,7 @@ const StyledDate = styled.p`
 `;
 
 const StyledImgWrapper = styled.div`
+position: relative;
   width: 100%;
   max-width: 540px;
   height: 400px;
@@ -24,12 +26,6 @@ const StyledImgWrapper = styled.div`
     max-width: 280px;
     height: 200px;
   }
-`;
-
-const StyledImg = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 `;
 
 interface BlogArticle {
@@ -57,7 +53,7 @@ const ArticlePage: NextPage<Props> = ({ article }: Props) => (
             <ArticleTitle>{article.title}</ArticleTitle>
             <StyledDate>{formatDate(article.publishedAt)}</StyledDate>
             <StyledImgWrapper>
-              <StyledImg src={article.image.src} alt={article.image.alt} />
+              <Image src={article.image.src} alt={article.title} layout="fill" objectFit="cover" />
             </StyledImgWrapper>
             <ReactMarkdown>{article.content}</ReactMarkdown>
           </Article>
@@ -73,29 +69,54 @@ const ArticlePage: NextPage<Props> = ({ article }: Props) => (
 );
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { data } = await axiosConfig.getArticlesData();
-  const paths = data.articles.map((article: BlogArticle) => ({
-    params: { slug: article.slug },
-  }));
+  try {
+    const { data } = await axiosConfig.getArticlesData();
 
-  return {
-    paths,
-    fallback: 'blocking',
-  };
+    if (!data || !data.articles) {
+      return { paths: [], fallback: false };
+    }
+
+    const paths = data.articles.map((article: BlogArticle) => ({
+      params: { slug: article.slug },
+    }));
+
+    return {
+      paths,
+      fallback: 'blocking',
+    };
+  } catch (error) {
+    return { paths: [], fallback: false };
+  }
 };
 
 export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
-  const slug = params?.slug;
-  const { data: articlesData } = await axiosConfig.getArticlesData();
-  const currentArticle = articlesData.articles.find((article: BlogArticle) => article.slug === slug);
-  const { data } = await axiosConfig.getArticleData(currentArticle.id);
-  const { article } = data;
+  if (!params?.slug) {
+    return { notFound: true };
+  }
+  const { slug } = params;
 
-  return {
-    props: {
-      article,
-    },
-  };
+  try {
+    const { data: articlesData } = await axiosConfig.getArticlesData();
+    const currentArticle = articlesData.articles.find((article: BlogArticle) => article.slug === slug);
+
+    if (!currentArticle) {
+      return { notFound: true };
+    }
+
+    const { data } = await axiosConfig.getArticleData(currentArticle.id);
+
+    if (!data) {
+      return { notFound: true };
+    }
+
+    return {
+      props: {
+        article: data.article,
+      },
+    };
+  } catch (error) {
+    return { notFound: true };
+  }
 };
 
 export default ArticlePage;

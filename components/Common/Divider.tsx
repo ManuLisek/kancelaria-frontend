@@ -3,6 +3,7 @@ import Container from '@mui/material/Container';
 import styled from 'styled-components';
 
 const DividerContainer = styled.div<DividerContainerProps>`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -13,6 +14,19 @@ const DividerContainer = styled.div<DividerContainerProps>`
   background: url(${(props) => props.image}) no-repeat fixed;
   background-size: cover;
   cursor: pointer;
+  z-index: -1;
+
+  &:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: black;
+    opacity: 0.6;
+    content: "";
+    z-index: -2;
+  }
 
   @media (max-width: 599px) {
     margin-bottom: 30px;

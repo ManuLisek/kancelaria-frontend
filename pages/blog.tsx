@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import { Container } from '@mui/material';
 import styled from 'styled-components';
+import Error from '../components/Common/Error';
 import { useData } from '../context/DataContext';
 import BlogCard from '../components/Blog/BlogCard';
 import PageTitle from '../components/Common/PageTitle';
@@ -13,8 +14,20 @@ const StyledArticlesContainer = styled.div`
 `;
 
 const BlogPage: NextPage = () => {
-  const { articles } = useData();
-  const sortedArticles = articles.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+  const { articles, hasError } = useData();
+
+  if (hasError) {
+    return (
+      <Container>
+        <PageTitle>Blog prawny</PageTitle>
+        <Error>Przepraszamy, wystąpił błąd podczas ładowania artykułów.</Error>
+      </Container>
+    );
+  }
+
+  const sortedArticles = articles && articles.length > 0
+    ? articles.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
+    : [];
 
   return (
     <Container>
@@ -31,7 +44,6 @@ const BlogPage: NextPage = () => {
         ))}
       </StyledArticlesContainer>
     </Container>
-
   );
 };
 

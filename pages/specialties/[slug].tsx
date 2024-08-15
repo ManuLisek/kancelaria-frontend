@@ -38,29 +38,54 @@ const SpecPage: NextPage<Props> = ({ spec }: Props) => (
 );
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { data } = await axiosConfig.getSpecsData();
-  const paths = data.specs.map((spec: Spec) => ({
-    params: { slug: spec.slug },
-  }));
+  try {
+    const { data } = await axiosConfig.getSpecsData();
 
-  return {
-    paths,
-    fallback: false,
-  };
+    if (!data || !data.specs) {
+      return { paths: [], fallback: false };
+    }
+
+    const paths = data.specs.map((spec: Spec) => ({
+      params: { slug: spec.slug },
+    }));
+
+    return {
+      paths,
+      fallback: false,
+    };
+  } catch (error) {
+    return { paths: [], fallback: false };
+  }
 };
 
 export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
-  const slug = params?.slug;
-  const { data: specsData } = await axiosConfig.getSpecsData();
-  const currentSpec = specsData.specs.find((spec: Spec) => spec.slug === slug);
-  const { data } = await axiosConfig.getSpecData(currentSpec.id);
-  const { spec } = data;
+  if (!params?.slug) {
+    return { notFound: true };
+  }
 
-  return {
-    props: {
-      spec,
-    },
-  };
+  const { slug } = params;
+
+  try {
+    const { data: specsData } = await axiosConfig.getSpecsData();
+    const currentSpec = specsData.specs.find((spec: Spec) => spec.slug === slug);
+
+    if (!currentSpec) {
+      return { notFound: true };
+    }
+
+    const { data } = await axiosConfig.getSpecData(currentSpec.id);
+    if (!data) {
+      return { notFound: true };
+    }
+
+    return {
+      props: {
+        spec: data.spec,
+      },
+    };
+  } catch (error) {
+    return { notFound: true };
+  }
 };
 
 export default SpecPage;
