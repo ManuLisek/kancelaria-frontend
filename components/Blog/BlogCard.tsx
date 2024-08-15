@@ -5,7 +5,7 @@ import { formatDate } from '../../helpers/formatDate';
 
 const StyledArticlesTitle = styled.h4`
   margin-bottom: 8px;
-  color: black;
+  color: ${(props) => props.theme.palette.common.black};
 
   @media (max-width: 599px) {
     font-size: 14px;
@@ -19,7 +19,7 @@ const StyledCard = styled.div`
   gap: 20px;
   width: 450px;
   padding: 20px;
-  background-color: white;
+  background-color: ${(props) => props.theme.palette.common.white};
   opacity: .9;
   cursor: pointer;
   z-index: 1;
@@ -50,7 +50,7 @@ const StyledImgWrapper = styled.div`
 `;
 
 const StyledDate = styled.p`
-  color: black;
+  color: ${(props) => props.theme.palette.common.black};
   font-size: 14px;
 `;
 
