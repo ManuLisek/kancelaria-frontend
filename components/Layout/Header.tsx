@@ -30,7 +30,7 @@ const DrawerContent = styled.div`
 `;
 
 const StyledListItemButton = styled(ListItemButton)`
-  color: white;
+  color: ${(props) => props.theme.palette.common.white};
 
   &.active {
     color: ${(props) => props.theme.palette.primary.main};
@@ -62,7 +62,7 @@ const StyledBox = styled(Box)`
 `;
 
 const StyledButton = styled(Button)`
-  color: white;
+  color: ${(props) => props.theme.palette.common.white};
 
   &.active {
     color: ${(props) => props.theme.palette.primary.main};
@@ -86,7 +86,7 @@ const StyledToolbar = styled(Toolbar)`
 `;
 
 const StyledDrawerContent = styled(DrawerContent)`
-  background-color: black;
+  background-color: ${(props) => props.theme.palette.common.black};
   border-right: 1px solid ${(props) => props.theme.palette.primary.main};
 `;
 

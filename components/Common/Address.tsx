@@ -7,7 +7,7 @@ const StyledContentSpan = styled.span`
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  color: white;
+  color: ${(props) => props.theme.palette.common.white};
 `;
 
 const StyledLocationIcon = styled(LocationIcon)`

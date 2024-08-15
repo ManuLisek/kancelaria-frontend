@@ -1,7 +1,7 @@
 import { NextPage, GetStaticPaths, GetStaticProps } from 'next';
 import { Container } from '@mui/material';
 import ReactMarkdown from 'react-markdown';
-import Specs from '../../components/Spec/Specs';
+import dynamic from 'next/dynamic';
 import Article from '../../components/Blog/Article/Article';
 import ArticleTitle from '../../components/Blog/Article/ArticleTitle';
 import ArticleSeeAlso from '../../components/Blog/Article/ArticleSeeAlso';
@@ -18,24 +18,28 @@ interface Props {
   spec: Spec;
 }
 
-const SpecPage: NextPage<Props> = ({ spec }: Props) => (
-  <>
-    <Container maxWidth="md">
-      {spec
-        ? (
-          <Article>
-            <ArticleTitle>{spec.name}</ArticleTitle>
-            <ReactMarkdown>{spec.content}</ReactMarkdown>
-          </Article>
-        )
-        : (
-          <div>Specjalizacja nie została znaleziona.</div>
-        )}
-    </Container>
-    <ArticleSeeAlso />
-    <Specs excludeId={Number(spec.id)} />
-  </>
-);
+const SpecPage: NextPage<Props> = ({ spec }: Props) => {
+  const SpecsLazy = dynamic(() => import('../../components/Spec/Specs'));
+
+  return (
+    <>
+      <Container maxWidth="md">
+        {spec
+          ? (
+            <Article>
+              <ArticleTitle>{spec.name}</ArticleTitle>
+              <ReactMarkdown>{spec.content}</ReactMarkdown>
+            </Article>
+          )
+          : (
+            <div>Specjalizacja nie została znaleziona.</div>
+          )}
+      </Container>
+      <ArticleSeeAlso />
+      <SpecsLazy excludeId={Number(spec.id)} />
+    </>
+  );
+};
 
 export const getStaticPaths: GetStaticPaths = async () => {
   try {

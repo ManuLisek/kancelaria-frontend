@@ -3,7 +3,7 @@ import Container from '@mui/material/Container';
 import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
 import Image from 'next/image';
-import BlogSection from '../../components/Blog/BlogSection';
+import dynamic from 'next/dynamic';
 import { formatDate } from '../../helpers/formatDate';
 import Article from '../../components/Blog/Article/Article';
 import ArticleTitle from '../../components/Blog/Article/ArticleTitle';
@@ -44,29 +44,32 @@ interface Props {
   article: BlogArticle;
 }
 
-const ArticlePage: NextPage<Props> = ({ article }: Props) => (
-  <>
-    <Container maxWidth="md">
-      {article
-        ? (
-          <Article>
-            <ArticleTitle>{article.title}</ArticleTitle>
-            <StyledDate>{formatDate(article.publishedAt)}</StyledDate>
-            <StyledImgWrapper>
-              <Image src={article.image.src} alt={article.title} layout="fill" objectFit="cover" />
-            </StyledImgWrapper>
-            <ReactMarkdown>{article.content}</ReactMarkdown>
-          </Article>
+const ArticlePage: NextPage<Props> = ({ article }: Props) => {
+  const BlogSectionLazy = dynamic(() => import('../../components/Blog/BlogSection'));
+  return (
+    <>
+      <Container maxWidth="md">
+        {article
+          ? (
+            <Article>
+              <ArticleTitle>{article.title}</ArticleTitle>
+              <StyledDate>{formatDate(article.publishedAt)}</StyledDate>
+              <StyledImgWrapper>
+                <Image src={article.image.src} alt={article.title} layout="fill" objectFit="cover" />
+              </StyledImgWrapper>
+              <ReactMarkdown>{article.content}</ReactMarkdown>
+            </Article>
 
-        )
-        : (
-          <div>Artykuł nie został znaleziony.</div>
-        )}
-    </Container>
-    <ArticleSeeAlso />
-    <BlogSection excludeId={Number(article.id)} />
-  </>
-);
+          )
+          : (
+            <div>Artykuł nie został znaleziony.</div>
+          )}
+      </Container>
+      <ArticleSeeAlso />
+      <BlogSectionLazy excludeId={Number(article.id)} />
+    </>
+  );
+};
 
 export const getStaticPaths: GetStaticPaths = async () => {
   try {

@@ -22,7 +22,7 @@ const DividerContainer = styled.div<DividerContainerProps>`
     left: 0;
     bottom: 0;
     right: 0;
-    background-color: black;
+    background-color: ${(props) => props.theme.palette.common.black};
     opacity: 0.6;
     content: "";
     z-index: -2;
@@ -37,7 +37,7 @@ const DividerContainer = styled.div<DividerContainerProps>`
 const Title = styled.h2`
   text-align: center;
   font-size: 48px;
-  color: white;
+  color: ${(props) => props.theme.palette.common.white};
   font-weight: bold;
 
   @media (max-width: 599px) {

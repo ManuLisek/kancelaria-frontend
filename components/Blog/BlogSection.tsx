@@ -36,7 +36,7 @@ const StyledWrapperImage = styled.div`
       bottom: 0;
       z-index: 1;
       content: "";
-      background-color: black;
+      background-color: ${(props) => props.theme.palette.common.black};
       opacity: .6;
     }
   }

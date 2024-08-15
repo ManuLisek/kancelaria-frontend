@@ -21,6 +21,10 @@ const theme = createTheme({
       main: '#E5E5E5',
       dark: '#010101',
     },
+    common: {
+      black: '#000000',
+      white: '#FFFFFF',
+    },
   },
 });
 
