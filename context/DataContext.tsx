@@ -5,6 +5,7 @@ import { TransformedSpec } from '../types/specTypes';
 interface DataContextType {
   specs: TransformedSpec[];
   articles: TransformedArticle[];
+  hasError?: boolean;
 }
 
 interface DataProviderType {

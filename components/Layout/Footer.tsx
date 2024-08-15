@@ -81,7 +81,7 @@ const currentYear = new Date().getFullYear();
 const allRightsReserved = `${copyRightSymbol} ${currentYear}. Wszelkie prawa zastrzeżone.`;
 
 const Footer = (): JSX.Element => {
-  const { specs } = useData();
+  const { specs, hasError } = useData();
 
   const specsList = specs.map((spec) => (
     <Link href={`/specjalizacje/${spec.slug}`} key={spec.id}>
@@ -100,7 +100,7 @@ const Footer = (): JSX.Element => {
               <Logo />
               <Link href="/" passHref>
                 <StyledLink>
-                  Kancelaria Adwokacka -
+                  Kancelaria Adwokacka
                   <br />
                   Adwokat Wiktoria Sendzik
                 </StyledLink>
@@ -127,7 +127,11 @@ const Footer = (): JSX.Element => {
             </Link>
             <FlexContainer>
               <List>
-                {specsList}
+                {hasError ? (
+                  <div>Błąd pobierania danych.</div>
+                ) : (
+                  specsList
+                )}
               </List>
             </FlexContainer>
           </Grid>

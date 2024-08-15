@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { useData } from '../../context/DataContext';
 import Spec from './Spec';
 import { TransformedSpec } from '../../types/specTypes';
+import Error from '../Common/Error';
 
 const StyledGrid = styled(Grid)`
   justify-content: center;
@@ -16,7 +17,16 @@ interface SpecsProps {
 }
 
 const Specs = ({ excludeId }: SpecsProps) => {
-  const { specs } = useData();
+  const { specs, hasError } = useData();
+
+  if (hasError) {
+    return (
+      <Container>
+        <Error>Przepraszamy, wystąpił błąd podczas ładowania specjalizacji.</Error>
+      </Container>
+    );
+  }
+
   const filteredSpecs = excludeId ? specs.filter((spec: TransformedSpec) => spec.id !== excludeId) : specs;
   const specsList = filteredSpecs.map((spec: TransformedSpec) => (
     <Grid key={spec.id} item xs={6} sm={4}>

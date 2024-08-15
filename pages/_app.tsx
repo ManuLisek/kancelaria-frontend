@@ -46,17 +46,30 @@ const MyApp = ({ Component, pageProps }: MyAppProps) => (
 );
 
 MyApp.getInitialProps = async () => {
-  const articlesData = await axiosConfig.getArticlesData();
-  const specsData = await axiosConfig.getSpecsData();
+  try {
+    const articlesData = await axiosConfig.getArticlesData();
+    const specsData = await axiosConfig.getSpecsData();
 
-  return {
-    pageProps: {
-      initialData: {
-        articles: articlesData.data.articles,
-        specs: specsData.data.specs,
+    return {
+      pageProps: {
+        initialData: {
+          articles: articlesData.data.articles,
+          specs: specsData.data.specs,
+          hasError: false,
+        },
       },
-    },
-  };
+    };
+  } catch (error) {
+    return {
+      pageProps: {
+        initialData: {
+          articles: [],
+          specs: [],
+          hasError: true,
+        },
+      },
+    };
+  }
 };
 
 export default MyApp;

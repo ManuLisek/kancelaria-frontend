@@ -5,6 +5,7 @@ import Image from 'next/image';
 import BlogCard from './BlogCard';
 import { useData } from '../../context/DataContext';
 import { formatDate } from '../../helpers/formatDate';
+import Error from '../Common/Error';
 
 const StyledBlogSection = styled.div`
   display: flex;
@@ -85,10 +86,20 @@ interface BlogSectionProps {
 }
 
 const BlogSection = ({ excludeId }: BlogSectionProps) => {
-  const { articles } = useData();
-  const sortedArticles = articles
-    .filter((article) => article.id !== excludeId)
-    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+  const { articles, hasError } = useData();
+
+  if (hasError) {
+    return (
+      <Container>
+        <Error>Przepraszamy, wystąpił błąd podczas ładowania artykułów.</Error>
+      </Container>
+    );
+  }
+
+  const sortedArticles = articles && articles.length > 0
+    ? articles.filter((article) => article.id !== excludeId)
+      .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
+    : [];
   const newestArticle = sortedArticles[0];
   const latestArticles = sortedArticles.slice(1, 4);
 
