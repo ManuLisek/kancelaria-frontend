@@ -25,7 +25,7 @@ export default {
             publishedAt: article.attributes.publishedAt.slice(0, 10),
             slug: article.attributes.slug,
             image: {
-              src: `${process.env.NEXT_PUBLIC_STRAPI_URL}${article.attributes.image.data.attributes.url}`,
+              src: article.attributes.image.data.attributes.url,
               alt: article.attributes.image.data.attributes.alternativeText,
             },
           }),
@@ -54,7 +54,7 @@ export default {
           publishedAt: parsedResponse.data.attributes.publishedAt.slice(0, 10),
           slug: parsedResponse.data.attributes.slug,
           image: {
-            src: `${process.env.NEXT_PUBLIC_STRAPI_URL}${parsedResponse.data.attributes.image.data.attributes.url}`,
+            src: parsedResponse.data.attributes.image.data.attributes.url,
             alt: parsedResponse.data.attributes.image.data.attributes.alternativeText,
           },
         };
