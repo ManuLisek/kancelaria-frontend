@@ -6,7 +6,10 @@ const nextConfig = {
     styledComponents: true,
   },
   images: {
-    domains: ['localhost'],
+    domains: [
+      'beautiful-poem-dd757378fa.strapiapp.com',
+      'beautiful-poem-dd757378fa.media.strapiapp.com'
+    ],
   },
   
   async rewrites() {
