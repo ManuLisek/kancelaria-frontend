@@ -2,6 +2,7 @@ import '../styles/globals.css';
 import { ThemeProvider } from 'styled-components';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
+import { StyledEngineProvider } from '@mui/material/styles';
 import { DataProvider } from '../context/DataContext';
 import theme from '../theme/theme';
 import Footer from '../components/Layout/Footer';
@@ -23,26 +24,29 @@ export interface MyAppProps extends AppProps {
 }
 
 const MyApp = ({ Component, pageProps }: MyAppProps) => (
-  <DataProvider initialData={pageProps.initialData}>
-    <Head>
-      <meta charSet="utf-8" />
-      <meta name="viewport" content="initial-scale=1, width=device-width" />
-      <title>Kancelaria Adwokacka - Adwokat Wiktoria Sendzik</title>
-      <meta
-        name="description"
-        content="Kancelaria adwokacka z Olsztyna. Profesjonalne porady prawne.
+  <StyledEngineProvider injectFirst>
+    <DataProvider initialData={pageProps.initialData}>
+      <Head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <title>Kancelaria Adwokacka - Adwokat Wiktoria Sendzik</title>
+        <meta
+          name="description"
+          content="Kancelaria adwokacka z Olsztyna. Profesjonalne porady prawne.
         Zajmuję się obsługą prawną osób fizycznych jak również przedsiębiorstw.
         Posidam wieloletnie doświadczenie z zakresu wielu dziedzin prawa."
-      />
-    </Head>
-    <ThemeProvider theme={theme}>
-      <Header />
-      <Main>
-        <Component {...pageProps} />
-      </Main>
-      <Footer />
-    </ThemeProvider>
-  </DataProvider>
+        />
+      </Head>
+      <ThemeProvider theme={theme}>
+        <Header />
+        <Main>
+          <Component {...pageProps} />
+        </Main>
+        <Footer />
+      </ThemeProvider>
+    </DataProvider>
+  </StyledEngineProvider>
+
 );
 
 MyApp.getInitialProps = async () => {
