@@ -7,8 +7,8 @@ const nextConfig = {
   },
   images: {
     domains: [
-      'radiant-duck-cdb851e05b.strapiapp.com',
-      'radiant-duck-cdb851e05b.media.strapiapp.com'
+      'splendid-success-ea72cf56ae.strapiapp.com',
+      'splendid-success-ea72cf56ae.media.strapiapp.com'
     ],
   },
   
