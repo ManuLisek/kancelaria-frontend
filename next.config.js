@@ -7,8 +7,8 @@ const nextConfig = {
   },
   images: {
     domains: [
-      'effortless-star-b6bb350033.strapiapp.com',
-      'effortless-star-b6bb350033.media.strapiapp.com'
+      'upbeat-cat-c8a3ad1ca4.strapiapp.com',
+      'upbeat-cat-c8a3ad1ca4.media.strapiapp.com'
     ],
   },
   
